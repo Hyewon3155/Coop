@@ -65,8 +65,7 @@
       <input type="text" name="company" value=${rq.loginedMember.company }>
       <hr class="mt-2">
       <h1 class="block font-semibold mb-2">직급</h1>
-      <i class="bi bi-person-vcard mr-2"></i>
-	  <select id="position_level" name="position">
+	  <select class="select select-bordered select-sm w-full max-w-xs" id="position_level" name="position">
 		  <option value=${rq.loginedMember.position } style="display: none;"selected>
 		   <c:if test="${rq.loginedMember.position == 1  }">
 		   		부장 이상
@@ -80,8 +79,7 @@
 	  </select>
       <hr class="mt-2">
       <h1 class="block font-semibold mb-2">부서</h1>
-      <i class="bi bi-person-vcard mr-2"></i>
-      <select name="depart">
+      <select class="select select-bordered select-sm w-full max-w-xs" name="depart">
 		  <option value=${rq.loginedMember.depart } style="display: none;" selected >${rq.loginedMember.depart }</option>
 		  <option value="인사부">인사부</option>
 	       <option value="재무부">재무부</option>

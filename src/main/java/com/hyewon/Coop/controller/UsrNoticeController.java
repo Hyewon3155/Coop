@@ -1,8 +1,12 @@
 package com.hyewon.Coop.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hyewon.Coop.service.NoticeService;
@@ -50,11 +54,40 @@ public class UsrNoticeController {
 
 		
 	}
+	
 	@RequestMapping("/user/notice/check")
-	public String check() {
+	public String showList(Model model,
+			@RequestParam(defaultValue = "1") int page) {
+
+		if (page <= 0) {
+			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다", true);
+		}
+
+		int noticesCnt = noticeService.getNoticeCount();
+
+		int itemsInAPage = 10;
+
+		int pagesCount = (int) Math.ceil((double) noticesCnt / itemsInAPage);
+
+		List<Notice> notices = noticeService.getNotices(itemsInAPage, page);
+
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page);
+		model.addAttribute("noticesCnt", noticesCnt);
+		model.addAttribute("notices", notices);
+
 		return "user/notice/check";
 	}
 	
+	@RequestMapping("/user/notice/detail")
+	public String showDetail(Model model, int id) {
+
+        Notice notice = noticeService.getNoticeById(id);
+        
+		model.addAttribute("notice", notice);
+	
+		return "user/notice/detail";
+	}
 }
 
 

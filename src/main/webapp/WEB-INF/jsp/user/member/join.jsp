@@ -144,19 +144,17 @@
       <input type="text" name="name" placeholder="이름">
       <hr class="mt-2">
       <h1 class="block font-semibold mb-2 mt-2">COMPANY</h1>
-      <i class="fas fa-user mr-2"></i>
+      <i class="bi bi-building mr-2"></i>
       <input type="text" name="company" placeholder="회사명">
       <hr class="mt-2">
        <h1 class="block font-semibold mb-2 mt-2">POSITION</h1>
-      <i class="bi bi-person-vcard mr-2"></i>
-      <select  id="position_level" name="position">
+      <select class="select select-bordered select-sm w-full max-w-xs" id="position_level" name="position">
        <option value=1>부장 이상</option>
        <option value=0>부장 미만</option>
       </select>
       <hr class="mt-2">
        <h1 class="block font-semibold mb-2 mt-2">DEPARTMENT</h1>
-       <i class="bi bi-person-badge mr-2"></i>
-      <select name="depart">
+      <select name="depart" class="select select-bordered select-sm w-full max-w-xs">
        <option value="인사부">인사부</option>
        <option value="재무부">재무부</option>
        <option value="운영부">운영부</option>

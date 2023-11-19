@@ -14,5 +14,10 @@ public class Notice {
 	private int memberId;
 	private String title;
 	private String body;
+	private String writerName;
+    private String departName;
+    public String getForPrintBody() {
+		return this.body.replaceAll("\n", "<br />");
+	}
 	
 }
