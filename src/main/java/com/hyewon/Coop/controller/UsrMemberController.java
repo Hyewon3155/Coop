@@ -32,13 +32,16 @@ public class UsrMemberController {
 	
 	@RequestMapping("/user/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name, String nickname, String email, String cellphoneNum) {
+	public String doJoin(String loginId, String loginPw, String name, String company, int position, String depart, String nickname, String email, String cellphoneNum) {
 
 		if (Util.empty(loginId)) {
 			return Util.jsHistoryBack("아이디를 입력해주세요");
 		}
 		if (Util.empty(loginPw)) {
 			return Util.jsHistoryBack("비밀번호를 입력해주세요");
+		}
+		if (Util.empty(company)) {
+			return Util.jsHistoryBack("회사명을 입력해주세요");
 		}
 		if (Util.empty(name)) {
 			return Util.jsHistoryBack("이름을 입력해주세요");
@@ -55,7 +58,7 @@ public class UsrMemberController {
 			return Util.jsHistoryBack("전화번호를 입력해주세요");
 		}
 		
-		ResultData<Integer> doJoinRd = memberService.doJoin(loginId, Util.sha256(loginPw), name, nickname, email, cellphoneNum);
+		ResultData<Integer> doJoinRd = memberService.doJoin(loginId, Util.sha256(loginPw), name, company, position, depart, nickname, email, cellphoneNum);
 		
 		if (doJoinRd.isFail()) {
 			return Util.jsHistoryBack(doJoinRd.getMsg());
@@ -153,23 +156,27 @@ public class UsrMemberController {
 	
 	@RequestMapping("/user/member/doModify")
 	@ResponseBody
-	public String doModify(String name, String nickname, String cellphoneNum, String email_name, String email_domain) {
-		
+	public String doModify(String name, String company, int position, String depart, String nickname, String email, String cellphoneNum) {
+
+		if (Util.empty(company)) {
+			return Util.jsHistoryBack("회사명을 입력해주세요");
+		}
 		if (Util.empty(name)) {
 			return Util.jsHistoryBack("이름을 입력해주세요");
 		}
-		
 		if (Util.empty(nickname)) {
 			return Util.jsHistoryBack("닉네임을 입력해주세요");
+		}
+		
+		if (Util.empty(email)) {
+			return Util.jsHistoryBack("이메일을 입력해주세요");
 		}
 		
 		if (Util.empty(cellphoneNum)) {
 			return Util.jsHistoryBack("전화번호를 입력해주세요");
 		}
 		
-		String email = email_name + "@" + email_domain;
-		
-		memberService.doModify(rq.getLoginedMemberId(), name, nickname, cellphoneNum, email);
+		memberService.doModify(rq.getLoginedMemberId(), name, company, position, depart, nickname, cellphoneNum, email);
 		
 		return Util.jsReplace("회원정보가 수정되었습니다", "mypage");
 	}
@@ -270,16 +277,6 @@ public class UsrMemberController {
 		return "user/member/home";
 	}
 	
-	@RequestMapping("/user/member/notice")
-	public String showNotice() {
-		return "user/member/notice";
-	}
-	
-	@RequestMapping("/user/member/write")
-	public String showWrite() {
-		return "user/member/write";
-	}
-
 
 	
 	

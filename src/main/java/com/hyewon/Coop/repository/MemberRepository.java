@@ -16,12 +16,15 @@ public interface MemberRepository {
 					updateDate = NOW(),
 					loginId = #{loginId},
 					loginPw = #{loginPw},
+					company = #{company},
+					`position` = #{position},
+					depart = #{depart},
 					`name` = #{name},
 					nickname = #{nickname},
 					email = #{email},
 					cellphoneNum = #{cellphoneNum}
 			""")
-	public void doJoin(String loginId, String loginPw, String name, String nickname, String email, String cellphoneNum);
+	public void doJoin(String loginId, String loginPw, String name, String company, int position, String depart, String nickname, String email, String cellphoneNum);
 	
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
@@ -53,12 +56,15 @@ public interface MemberRepository {
 			UPDATE `member`
 				SET updateDate = NOW(),
 					name = #{name},
+					company = #{company},
+					position = #{position},
+					depart = #{depart},
 					nickname = #{nickname},
 					cellphoneNum = #{cellphoneNum},
 					email = #{email}
 				WHERE id = #{loginedMemberId}
 			""")
-	public void doModify(int loginedMemberId, String name, String nickname, String cellphoneNum, String email);
+	public void doModify(int loginedMemberId, String name, String company, int position, String depart, String nickname, String cellphoneNum, String email);
 
 	@Select("""
 			SELECT *

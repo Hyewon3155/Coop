@@ -23,7 +23,7 @@
        </li>
     </ul>
     <div class="card-actions justify-end">
-    <a href="notice">
+    <a href="../notice/check">
       <button class="btn btn-primary">
        바로가기
       </button>

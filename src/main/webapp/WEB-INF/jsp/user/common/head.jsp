@@ -33,25 +33,29 @@
             <div class="dropdown">
                 <a href="#">게시판</a>
                 <div class="dropdown-content">
-                    <a href="../member/notice">공지사항</a>
+                    <a href="../notice/check">공지사항</a>
                 </div>
             </div>
-            <div class="dropdown">
-                <a href="#">프로젝트 관리</a>
-                <div class="dropdown-content">
-                    <div class="nested-dropdown">
-                        <a href="#">프로젝트 생성</a>
-                        <div class="nested-dropdown-content">
-                            <a href="../project/create">프로젝트 기본 정보 입력 및 생성</a>
-                            <a href="../project/work_create">프로젝트 작업 할당</a>
-                        </div>
-                    </div>
-                        <a href="../project/check">프로젝트 조회</a>
-                    
-                        <a href="../project/modify">프로젝트 수정</a>
-                    <a href="../project/delete">프로젝트 삭제</a>
+           <div class="dropdown">
+    <a href="#">프로젝트 관리</a>
+    <div class="dropdown-content">
+        <c:if test="${rq.loginedMember.position == 1}">
+            <div class="nested-dropdown">
+                <a href="#">프로젝트 생성</a>
+                <div class="nested-dropdown-content">
+                    <a href="../project/create">프로젝트 기본 정보 입력 및 생성</a>
+                    <a href="../project/work_create">프로젝트 작업 할당</a>
                 </div>
             </div>
+
+            <a href="../project/modify">프로젝트 수정</a>
+            <a href="../project/delete">프로젝트 삭제</a>
+        </c:if>
+
+        <a href="../project/check">프로젝트 조회</a>
+    </div>
+</div>
+           
             <div class="dropdown">
                 <a href="#">할 일 보기</a>
                 <div class="dropdown-content">

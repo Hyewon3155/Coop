@@ -7,15 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Study {
+public class Notice {
 	private int id;
 	private String regDate;
 	private String updateDate;
+	private int memberId;
 	private String title;
 	private String body;
-	private String host;
-	private int status;
-	private int headCount;
-	private String pw;
-
+	
 }
