@@ -26,7 +26,7 @@ public class MemberService {
 		this.mailService = mailService;
 	}
 	
-	public ResultData<Integer> doJoin(String loginId, String loginPw, String name, String company, int position, String depart, String nickname, String email, String cellphoneNum) {
+	public ResultData<Integer> doJoin(String loginId, String loginPw, String name, String company, String pw, int position, String depart, String nickname, String email, String cellphoneNum) {
 
 		Member existsMember = getMemberByLoginId(loginId);
 		
@@ -46,7 +46,7 @@ public class MemberService {
 			return ResultData.from("F-9", Util.f("이미 사용중인 이름(%s)과 이메일(%s) 입니다", name, email));
 		}
 		
-		memberRepository.doJoin(loginId, loginPw, name, company, position, depart, nickname, email, cellphoneNum);
+		memberRepository.doJoin(loginId, loginPw, name, company, pw, position, depart, nickname, email, cellphoneNum);
 		
 		return ResultData.from("S-1", Util.f("%s님이 가입되었습니다", nickname), "nickname", memberRepository.getLastInsertId());
 	}
@@ -67,8 +67,8 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 
-	public void doModify(int loginedMemberId, String name, String company, int position, String depart, String nickname, String cellphoneNum, String email) {
-		memberRepository.doModify(loginedMemberId, name, company, position, depart, nickname, cellphoneNum, email);
+	public void doModify(int loginedMemberId, String name, String company, String pw, int position, String depart, String nickname, String cellphoneNum, String email) {
+		memberRepository.doModify(loginedMemberId, name, company, pw, position, depart, nickname, cellphoneNum, email);
 	}
 
 	public void doPasswordModify(int loginedMemberId, String loginPw) {
@@ -95,6 +95,20 @@ public class MemberService {
 
 	private void setTempPassword(Member member, String tempPassword) {
 		memberRepository.doPasswordModify(member.getId(), Util.sha256(tempPassword));
+	}
+
+	public Member getMemberByCompany(String company) {
+		return memberRepository.getMemberByCompany(company);
+
+	}
+
+	public Member getMemberByCompanyAndPw(String company, String pw) {
+		return memberRepository.getMemberByCompanyAndPw(company, pw);
+	}
+
+	public String isFirstMember(String company) {
+		return memberRepository.isFirstMember(company);
+
 	}
 	
 }

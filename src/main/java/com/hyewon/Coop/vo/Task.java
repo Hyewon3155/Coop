@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Study {
+public class Task {
 	private int id;
-	private String regDate;
-	private String updateDate;
 	private String title;
 	private String body;
-	private String host;
+	private String startDate;
+	private String endDate;
+	private int writer;
+	private int project_id;
 	private int status;
-	private int headCount;
-	private String pw;
+	
 
 }

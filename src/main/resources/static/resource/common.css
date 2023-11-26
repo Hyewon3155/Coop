@@ -169,13 +169,12 @@ table, th, td {
         }
 
         .task-person {
-            flex-basis: 20%; /* 담당자와 담당자: 김철수의 너비 */
+            flex-basis: 30%; /* 담당자와 담당자: 김철수의 너비 */
             flex-grow: 0;
             flex-shrink: 0;
             padding: 10px;
             box-sizing: border-box;
             text-align: center;
-          margin-left: 5px;
         }
         .profile-images {
             display: flex;
@@ -229,21 +228,6 @@ table, th, td {
 
 
 
-.check-grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr; /* 3개의 열 생성 */
-            grid-template-rows: 1fr 1fr; /* 2개의 행 생성 */
-            grid-gap: 10px; /* 그리드 아이템 간격 설정 */
-  height:100%;
-  width:100%;
-          
-        }
-
-.check-grid-item {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-}
 
 .work-grid-container {
   height:100%;

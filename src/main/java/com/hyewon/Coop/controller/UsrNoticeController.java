@@ -45,11 +45,11 @@ public class UsrNoticeController {
 			return Util.jsHistoryBack("내용 입력해주세요");
 		}
 		
-	    noticeService.doWrite(rq.getLoginedMemberId(), title, body);
+	    noticeService.doWrite(rq.getLoginedMemberId(), rq.getLoginedMember().getCompany(), title, body);
 		
 		int id = noticeService.getLastInsertId();
 		
-		return Util.jsReplace(Util.f("%d번 게시물이 생성되었습니다", id), Util.f("/"));
+		return Util.jsReplace(Util.f("게시물이 생성되었습니다"), Util.f("/"));
 
 
 		
@@ -63,13 +63,13 @@ public class UsrNoticeController {
 			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다", true);
 		}
 
-		int noticesCnt = noticeService.getNoticeCount();
+		int noticesCnt = noticeService.getNoticeCount(rq.getLoginedMember().getCompany());
 
 		int itemsInAPage = 10;
 
 		int pagesCount = (int) Math.ceil((double) noticesCnt / itemsInAPage);
 
-		List<Notice> notices = noticeService.getNotices(itemsInAPage, page);
+		List<Notice> notices = noticeService.getNotices(itemsInAPage, page, rq.getLoginedMember().getCompany());
 
 		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("page", page);
@@ -88,6 +88,57 @@ public class UsrNoticeController {
 	
 		return "user/notice/detail";
 	}
+	
+	@RequestMapping("/user/notice/modify")
+	public String modify(Model model, int id) {
+
+		Notice notice = noticeService.getNoticeById(id);
+
+		ResultData actorCanMD = noticeService.actorCanMD(rq.getLoginedMemberId(), notice);
+
+		if (actorCanMD.isFail()) {
+			return rq.jsReturnOnView(actorCanMD.getMsg(), true);
+		}
+
+		model.addAttribute("notice", notice);
+
+		return "user/notice/modify";
+	}
+	
+	@RequestMapping("/user/notice/doModify")
+	@ResponseBody
+	public String doModify(int id, String title, String body) {
+
+		Notice notice = noticeService.getNoticeById(id);
+
+		ResultData actorCanModifyRd = noticeService.actorCanMD(rq.getLoginedMemberId(), notice);
+
+		if (actorCanModifyRd.isFail()) {
+			return Util.jsHistoryBack(actorCanModifyRd.getMsg());
+		}
+
+		noticeService.doModify(id, title, body);
+
+		return Util.jsReplace(Util.f("%d번 게시물을 수정했습니다", id), Util.f("detail?id=%d", id));
+	}
+	
+	@RequestMapping("/user/notice/delete")
+	@ResponseBody
+	public String doDelete(int id) {
+
+		Notice notice = noticeService.getNoticeById(id);
+
+		ResultData actorCanModifyRd = noticeService.actorCanMD(rq.getLoginedMemberId(), notice);
+
+		if (actorCanModifyRd.isFail()) {
+			return Util.jsHistoryBack(actorCanModifyRd.getMsg());
+		}
+
+		noticeService.doDelete(id);
+
+		return Util.jsReplace(Util.f("%d번 게시물을 삭제했습니다", id), Util.f("check"));
+	}
+	
 }
 
 

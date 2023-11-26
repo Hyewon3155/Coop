@@ -20,5 +20,6 @@ public class Member {
 	private String email;
 	private int position;
 	private String depart;
+	private String pw;
 	
 }

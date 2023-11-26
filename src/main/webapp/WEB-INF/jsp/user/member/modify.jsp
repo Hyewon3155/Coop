@@ -5,6 +5,24 @@
 <%@ include file="../common/head.jsp" %>
 
 <script>
+	function isFirstMember(){
+		$.get('isFirstMember', {
+			 company : '${rq.loginedMember.company}',
+			 loginId : '${rq.loginedMember.loginId}',
+		}, function(data) {
+			if (data.success) {
+				 var element = document.getElementById("pw_div");
+				  element.style.display = "block";				
+			} else {
+			}
+			
+			
+		}, 'json');
+	  
+	}
+	$(document).ready(function() {
+	    isFirstMember();
+	 });
 	function handleSubmit() {
 	    var selectElement = document.getElementById('position_level');
 	    var selectedValue = parseInt(selectElement.value, 10); // 문자열을 정수로 변환
@@ -64,6 +82,12 @@
       <i class="fa-solid fa-people-group mr-2"></i>
       <input type="text" name="company" value=${rq.loginedMember.company }>
       <hr class="mt-2">
+      <div class="hidden" id="pw_div">
+	      <h1 class="block font-semibold mb-2 mt-2">회사 비밀번호</h1>
+		  <i class="fa-solid fa-user-lock mr-2"></i>
+		  <input type="text" name="pw" value=${rq.loginedMember.pw }>
+      	 <hr class="mt-2">
+      </div>
       <h1 class="block font-semibold mb-2">직급</h1>
 	  <select class="select select-bordered select-sm w-full max-w-xs" id="position_level" name="position">
 		  <option value=${rq.loginedMember.position } style="display: none;"selected>

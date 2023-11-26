@@ -1,10 +1,26 @@
 package com.hyewon.Coop.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.hyewon.Coop.service.NoticeService;
+import com.hyewon.Coop.service.TaskService;
+import com.hyewon.Coop.vo.Notice;
+import com.hyewon.Coop.vo.Rq;
+
 
 @Controller
 public class UsrHomeController {
+	   @Autowired
+	   private TaskService taskService;
+	   @Autowired
+	   private NoticeService noticeService;
+	   @Autowired
+	   Rq rq;
 	
 	@RequestMapping("/user/home/main")
 	public String homeMain() {
@@ -26,4 +42,10 @@ public class UsrHomeController {
 		return "redirect:user/home/main";
 	}
 	
+	@RequestMapping("/user/member/home")
+	public String showHome(Model model) {
+		List<Notice> notices = noticeService.getHomeNotices(rq.getLoginedMember().getCompany());
+		model.addAttribute("notices", notices);
+		return "user/member/home";
+	}
 }

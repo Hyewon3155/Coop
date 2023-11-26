@@ -25,9 +25,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="notice" items="${notices }">
+						<c:forEach  items="${notices}" var="notice" varStatus="status">
 							<tr>
-								<td>${notice.id }</td>
+								<td>${noticesCnt - status.index}</td>
 								<td><a class="hover:underline" href="detail?id=${notice.id }">${notice.title }</a></td>
 								<td>${notice.regDate.substring(2, 16) }</td>
 								<td>${notice.writerName }</td>

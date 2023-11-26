@@ -1,5 +1,8 @@
 package com.hyewon.Coop.vo;
 
+import java.util.List;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,18 +10,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Notice {
+public class Project {
+	
 	private int id;
-	private String regDate;
-	private String updateDate;
-	private int memberId;
+	private String startDate;
+	private String endDate;
+	private int manager;
 	private String title;
 	private String body;
-	private String writerName;
-    private String company;
-    private String departName;
-    public String getForPrintBody() {
+
+	private List<Member> teamMembers;
+	public String getForPrintBody() {
 		return this.body.replaceAll("\n", "<br />");
-	}
+}
+   
 	
 }

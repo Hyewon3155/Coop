@@ -32,7 +32,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/user/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name, String company, int position, String depart, String nickname, String email, String cellphoneNum) {
+	public String doJoin(String loginId, String loginPw, String name, String company,  String pw, int position, String depart, String nickname, String email, String cellphoneNum) {
 
 		if (Util.empty(loginId)) {
 			return Util.jsHistoryBack("아이디를 입력해주세요");
@@ -58,7 +58,7 @@ public class UsrMemberController {
 			return Util.jsHistoryBack("전화번호를 입력해주세요");
 		}
 		
-		ResultData<Integer> doJoinRd = memberService.doJoin(loginId, Util.sha256(loginPw), name, company, position, depart, nickname, email, cellphoneNum);
+		ResultData<Integer> doJoinRd = memberService.doJoin(loginId, Util.sha256(loginPw), name, company, pw, position, depart, nickname, email, cellphoneNum);
 		
 		if (doJoinRd.isFail()) {
 			return Util.jsHistoryBack(doJoinRd.getMsg());
@@ -83,6 +83,50 @@ public class UsrMemberController {
 		
 		return ResultData.from("S-1", "사용 가능한 아이디입니다", "loginId", loginId);
 	}
+	
+	@RequestMapping("/user/member/companyDupCheck")
+	@ResponseBody
+	public ResultData companyDupCheck(String company) {
+		
+		Member member = memberService.getMemberByCompany(company);
+		
+		if (member != null) {
+			return ResultData.from("S-1", "", "company", company);
+		}
+		
+		return ResultData.from("F-1", "", "company", company);
+	}
+	
+	@RequestMapping("/user/member/pwCheck")
+	@ResponseBody
+	public ResultData pwCheck(String company, String pw) {
+		
+		if (Util.empty(pw)) {
+			return ResultData.from("F-1", "비밀번호를 입력해주세요");
+		}
+		
+		Member member = memberService.getMemberByCompanyAndPw(company, pw);
+		
+		if (member != null) {
+			return ResultData.from("S-1", "비밀번호가 일치합니다", "pw", pw);
+		}
+		
+		return ResultData.from("F-2", "비밀번호가 일치하지 않습니다", "pw", pw);
+	}
+	
+	@RequestMapping("/user/member/isFirstMember")
+	@ResponseBody
+	public ResultData isFirstMember(String loginId, String company) {
+		
+		String firstLoginId = memberService.isFirstMember(company);
+		
+		if (firstLoginId.equals(loginId)) {
+			return ResultData.from("S-1", "");
+		}
+	    return ResultData.from("F-1", "");
+	}
+	
+	
 	
 
 	@RequestMapping("/user/member/login")
@@ -156,7 +200,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/user/member/doModify")
 	@ResponseBody
-	public String doModify(String name, String company, int position, String depart, String nickname, String email, String cellphoneNum) {
+	public String doModify(String name, String company, String pw, int position, String depart, String nickname, String email, String cellphoneNum) {
 
 		if (Util.empty(company)) {
 			return Util.jsHistoryBack("회사명을 입력해주세요");
@@ -176,7 +220,7 @@ public class UsrMemberController {
 			return Util.jsHistoryBack("전화번호를 입력해주세요");
 		}
 		
-		memberService.doModify(rq.getLoginedMemberId(), name, company, position, depart, nickname, cellphoneNum, email);
+		memberService.doModify(rq.getLoginedMemberId(), name, company, pw, position, depart, nickname, cellphoneNum, email);
 		
 		return Util.jsReplace("회원정보가 수정되었습니다", "mypage");
 	}
@@ -271,12 +315,6 @@ public class UsrMemberController {
 		
 		return Util.jsReplace(notifyTempLoginPwByEmailRd.getMsg(), "login");
 	}
-	
-	@RequestMapping("/user/member/home")
-	public String showCodeEditor() {
-		return "user/member/home";
-	}
-	
 
 	
 	

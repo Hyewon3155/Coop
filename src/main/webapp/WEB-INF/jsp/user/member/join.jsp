@@ -6,6 +6,7 @@
 
 <script>
 	let validLoginId = '';
+	let validPw = '';
 	
 	function handleSubmit() {
 	    var selectElement = document.getElementById('position_level');
@@ -119,13 +120,74 @@
 			
 		}, 'json');
 	}
+	  function companyDupCheck(event)  {
+		  event.value = event.value.trim();
+		  let replyContent = $("#open");
+          if(event.value.length == 0){
+        	  alert('회사 이름을 입력해주세요');
+        	  return;
+          }
+		  $.get('companyDupCheck', {
+				company : event.value,
+			}, function(data) {
+					if (data.success) {
+		    		      let addHtml = `<h1 class="block font-semibold mb-2 mt-2" id="pw_div">회사 비밀번호</h1>
+		    		          			 <i class="fa-solid fa-user-lock mr-2"></i>
+		    		          		      <input type="text" name="pw" placeholder="회사 비밀번호" onblur="pwCheck(this);">
+		    	                         <div id="pwCheckMsg" class="text-sm mt-2 h-5 text-red-500"></div>
+	
+		    				               `;
+		      	          replyContent.after(addHtml);
+
+	
+		    	   
+					} else {
+		    		      let addHtml = `<h1 class="block font-semibold mb-2 mt-2" id="pw_div">회사 비밀번호 설정</h1>
+			          			 <i class="fa-solid fa-user-lock mr-2"></i>
+		          		      <input type="text" name="pw" placeholder="회사 비밀번호를 설정해주세요">
+		    				               `;
+		      	          replyContent.after(addHtml);
+	
+					}
+
+				
+			}, 'json');
+		  
+     }
+	  
+	  function pwCheck(event){
+		    let company = $('#company').val(); // 회사 이름 가져오기
+		    console.log(company);
+
+			let pwCheckMsg = $('#pwCheckMsg');
+
+			$.get('pwCheck', {
+				pw : event.value,
+				company: company,
+			}, function(data) {
+				if (data.success) {
+					pwCheckMsg.removeClass('text-red-500');
+					pwCheckMsg.addClass('text-green-500');
+					pwCheckMsg.html(`<span>\${data.msg }</span>`);
+					validPw = data.data1;
+					
+				} else {
+					pwCheckMsg.removeClass('text-green-500');
+					pwCheckMsg.addClass('text-red-500');
+					pwCheckMsg.html(`<span>\${data.msg }</span>`);
+					validPw = '';
+				}
+				
+			}, 'json');
+		  
+	  }
 	  
 
 </script>
 
 <section class="mt-5 flex container mx-auto justify-center overflow-hidden">
   <div class="mx-auto">
-   <form action="doJoin" method="POST" onsubmit="join_submitForm(this); return false;">
+   <form action="doJoin" method="POST" onsubmit="join_submitForm(this); return false;" autocomplete="off">
     <h1 class="block font-semibold mb-2">ID</h1>
       <i class="fas fa-user mr-2"></i>
       <input type="text" name="loginId" placeholder="아이디" onblur="loginIdDupCheck(this);" />
@@ -145,8 +207,8 @@
       <hr class="mt-2">
       <h1 class="block font-semibold mb-2 mt-2">COMPANY</h1>
       <i class="bi bi-building mr-2"></i>
-      <input type="text" name="company" placeholder="회사명">
-      <hr class="mt-2">
+      <input type="text" name="company" id="company" placeholder="회사명" onblur="companyDupCheck(this);">
+      <hr class="mt-2" id="open">
        <h1 class="block font-semibold mb-2 mt-2">POSITION</h1>
       <select class="select select-bordered select-sm w-full max-w-xs" id="position_level" name="position">
        <option value=1>부장 이상</option>

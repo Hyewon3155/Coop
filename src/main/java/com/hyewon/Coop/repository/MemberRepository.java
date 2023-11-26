@@ -17,6 +17,7 @@ public interface MemberRepository {
 					loginId = #{loginId},
 					loginPw = #{loginPw},
 					company = #{company},
+					pw = #{pw},
 					`position` = #{position},
 					depart = #{depart},
 					`name` = #{name},
@@ -24,7 +25,7 @@ public interface MemberRepository {
 					email = #{email},
 					cellphoneNum = #{cellphoneNum}
 			""")
-	public void doJoin(String loginId, String loginPw, String name, String company, int position, String depart, String nickname, String email, String cellphoneNum);
+	public void doJoin(String loginId, String loginPw, String name, String company, String pw, int position, String depart, String nickname, String email, String cellphoneNum);
 	
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
@@ -57,6 +58,7 @@ public interface MemberRepository {
 				SET updateDate = NOW(),
 					name = #{name},
 					company = #{company},
+					pw = #{pw},
 					position = #{position},
 					depart = #{depart},
 					nickname = #{nickname},
@@ -64,7 +66,7 @@ public interface MemberRepository {
 					email = #{email}
 				WHERE id = #{loginedMemberId}
 			""")
-	public void doModify(int loginedMemberId, String name, String company, int position, String depart, String nickname, String cellphoneNum, String email);
+	public void doModify(int loginedMemberId, String name, String company, String pw, int position, String depart, String nickname, String cellphoneNum, String email);
 
 	@Select("""
 			SELECT *
@@ -80,6 +82,30 @@ public interface MemberRepository {
 			   WHERE id = #{loginedMemberId}
 			""")
 	public void doPasswordModify(int loginedMemberId, String loginPw);
+
+	@Select("""
+			SELECT *
+				FROM `member`
+				WHERE company = #{company}
+			""")
+	public Member getMemberByCompany(String company);
+
+	@Select("""
+			SELECT *
+				FROM `member`
+				WHERE company = #{company}
+				AND pw = #{pw}
+			""")
+	public Member getMemberByCompanyAndPw(String company, String pw);
+
+	@Select("""
+			SELECT loginId
+				FROM `member`
+				WHERE company = #{company}
+				ORDER BY regDate ASC
+				LIMIT 1
+			""")
+	public String isFirstMember(String company);
 
 	
 }

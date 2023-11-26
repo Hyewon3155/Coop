@@ -23,17 +23,13 @@
  
  </style>
  <nav class="bg-gray-200 py-10 h-full">
-    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10">
+    <div class="w-3/4 mx-auto bg-white p-8 rounded-lg shadow-md mt-10">
     <div class="table-box-type-1">
 				<table class="table w-full">
 					<colgroup>
 						<col width="200"/>
 					</colgroup>
 					<tbody>
-						<tr>
-							<th>번호</th>
-							<td><div class="badge">${notice.id }</div></td>
-						</tr>
 						<tr>
 							<th>작성자</th>
 							<td><div class="badge">${notice.writerName }</div></td>
@@ -58,9 +54,9 @@
 				</table>
 				</div>
     <c:if test="${rq.loginedMemberId == notice.memberId }">
-	    <div class="flex mt-2 justify-around w-full">
-	       <button class="btn-warning p-5 font-semibold rounded-xl w-full mr-2">수정하기</button>
-	       <button class="btn-error p-5 font-semibold rounded-xl w-full">삭제하기</button>
+	    <div class="flex mt-2 w-full">
+	       <a class="btn-warning p-2 font-semibold rounded-xl w-full mr-2 text-center" href="modify?id=${notice.id }">수정하기</a>
+	       <a class="btn-error p-2 font-semibold rounded-xl w-full text-center" href="delete?id=${notice.id }">삭제하기</a>
 	    </div>
     </c:if>
   <div class="mt-2 mx-auto">

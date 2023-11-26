@@ -8,20 +8,14 @@
           <div class="card w-full h-full bg-base-100 shadow-xl">
   <div class="card-body">
     <h2 class="text-3xl font-bold">공지사항</h2>
-   <ul style="list-style-type: disc;">
-     <li>
-       <span><a href="#">사내 연간 안전 교육</a></span>
-       <span class="text-gray-500">2023-10-23</span>
-       </li>
-     <li>
-       <span>사내 건강검진 안내</span>
-       <span class="text-gray-500">2023-10-22</span>
-       </li>
-     <li>
-       <span>연말정산 관련 안내</span>
-       <span class="text-gray-500">2023-10-22</span>
-       </li>
-    </ul>
+   <c:forEach var="notice" items="${notices }">
+    <ul style="list-style-type: disc;">
+    <li>
+		<span class="text-gray-500"><a class="hover:underline" href="../notice/detail?id=${notice.id }">${notice.title }</a></span>
+	</li>
+		</ul>
+	</c:forEach>
+  
     <div class="card-actions justify-end">
     <a href="../notice/check">
       <button class="btn btn-primary">
