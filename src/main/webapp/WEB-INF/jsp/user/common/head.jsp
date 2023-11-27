@@ -43,7 +43,8 @@
             <div class="nested-dropdown">
                 <a href="#">프로젝트 생성</a>
                 <div class="nested-dropdown-content">
-                    <a href="../project/create">프로젝트 기본 정보 입력 및 생성</a>
+                    <a href="../project/create">프로젝트 생성</a>
+                    <a href="../project/joinMember">프로젝트 팀원 추가</a>
                     <a href="../project/work_create">프로젝트 작업 할당</a>
                 </div>
             </div>

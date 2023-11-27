@@ -30,8 +30,8 @@ public interface ProjectRepository {
 	public int getLastInsertId();
 
 
-	@Insert("""
-			SELECT COUNT(DISTINCT p.id) AS projectCount
+	@Select("""
+			SELECT COUNT(*) AS projectCount
 			FROM project AS p
 			INNER JOIN project_member AS ptm ON p.id = ptm.project_id
 			WHERE ptm.member_id = #{loginedMemberId};
@@ -58,7 +58,30 @@ public interface ProjectRepository {
 
 			""")
 	public List<Project> getProjects(int limitStart, int itemsInAPage, int loginedMemberId);
-	
+
+	@Select("""
+			SELECT COUNT(*) AS projectCount
+			FROM project
+			WHERE manager = #{loginedMemberId}
+			        
+			""")
+	public int getProjectManagerCount(int loginedMemberId);
+
+	@Select("""
+			SELECT *
+			FROM project
+            WHERE manager = #{loginedMemberId}
+			ORDER BY id DESC
+			LIMIT #{limitStart}, #{itemsInAPage}
+
+			""")
+	public List<Project> getProjectsManager(int limitStart, int itemsInAPage, int loginedMemberId);
+
+    @Delete("""
+    		DELETE FROM project
+			WHERE id = #{id}
+    		""")
+	public void deleteProject(int id);
 	
 	
 

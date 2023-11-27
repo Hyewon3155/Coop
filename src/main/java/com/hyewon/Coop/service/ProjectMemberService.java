@@ -24,6 +24,16 @@ public class ProjectMemberService {
 		projectMemberRepository.doManagerJoin(project_id, member_id);
 		
 	}
+
+	public void join(int id, int project_id) {
+		projectMemberRepository.join(id, project_id);
+		
+	}
+
+	public void deleteProjectById(int id) {
+		projectMemberRepository.deleteProjectById(id);
+		
+	}
 	
 	
 }

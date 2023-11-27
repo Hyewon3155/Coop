@@ -20,7 +20,10 @@
 	}
 
 </style>
-  <div class="check-grid-container mt-10">
+
+  <div class="mt-5 text-xl font-semibold"><h2>총 : ${projectsCnt } 개</h2></div>
+
+  <div class="check-grid-container">
   <c:forEach items="${projects}" var="project">
     <div class="check-grid-item">
       <div class="card w-full h-full bg-base-100 shadow-xl">
@@ -48,7 +51,7 @@
   
   <div class="mt-2 flex justify-center">
 	 <div class="btn-group">
-		<c:set var="pageMenuLen" value="5" />
+		<c:set var="pageMenuLen" value="5" /> <!-- 한 화면에 출력할 페이지 번호 수 -->
 		<c:set var="startPage" value="${page - pageMenuLen >= 1 ? page - pageMenuLen : 1 }" />
 					<c:set var="endPage" value="${page + pageMenuLen <= pagesCount ? page + pageMenuLen : pagesCount }" />
 									
@@ -61,7 +64,7 @@
 						<a class="btn btn-sm" href="page=${page - 1 }">&lt;</a>
 					</c:if>
 					<c:forEach begin="${startPage }" end="${endPage }" var="i">
-						<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="page=${i }">${i }</a>
+						<a class="btn btn-sm ${page == i ? 'btn-active' : '' }" href="?page=${i }" id="abc" onclick="test();">${i }</a>
 					</c:forEach>
 					<c:if test="${page < pagesCount }">
 						<a class="btn btn-sm" href="page=${page + 1 }">&gt;</a>
@@ -71,6 +74,6 @@
 						<a class="btn btn-sm btn-disabled">&gt;</a>
 						<a class="btn btn-sm btn-disabled">»</a>
 					</c:if>
-				</div>
-			</div>
+		</div>
+	</div>
 <%@ include file="../common/foot.jsp" %> 

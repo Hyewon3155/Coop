@@ -20,31 +20,6 @@
 	}
 
 </style>
-<script>
-function deleteProject(id) {
-    var returnValue = confirm('삭제하시겠습니까?');
-    if (returnValue) {
-        $.ajax({
-            url: 'deleteProject/' + id, // URL 수정
-            type: 'DELETE', // GET 대신 DELETE 메소드 사용
-            success: function(data) {
-                if (data.success) {
-                    alert('삭제되었습니다');
-                    // 여기에 성공 시 페이지를 새로고침하거나 업데이트하는 로직을 추가할 수 있습니다.
-                } else {
-                    alert('삭제에 실패했습니다');
-                }
-            },
-            error: function(xhr, status, error) {
-                alert('삭제 처리 중 오류 발생: ' + error);
-                // 여기에 실패 시 처리 로직을 추가할 수 있습니다.
-            },
-            dataType: 'json'
-        });
-    }
-}
-
-</script>
 
   <div class="mt-5 text-xl font-semibold"><h2>총 : ${projectsCnt } 개</h2></div>
 
@@ -65,7 +40,9 @@ function deleteProject(id) {
             </li>
             </ul>
           <div class="mt-6 card-actions justify-end">
-      <button class="btn btn-primary" onclick="deleteProject(${project.id});">삭제하기</button>
+          <a href="member?id=${project.id }">
+      <button class="btn btn-primary">팀원 추가</button>
+          </a>
     </div>
         </div>
       </div>

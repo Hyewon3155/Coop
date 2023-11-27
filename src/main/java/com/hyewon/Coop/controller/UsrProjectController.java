@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hyewon.Coop.service.ProjectMemberService;
 import com.hyewon.Coop.service.ProjectService;
 import com.hyewon.Coop.util.Util;
+import com.hyewon.Coop.vo.Member;
 import com.hyewon.Coop.vo.Project;
+import com.hyewon.Coop.vo.ResultData;
 import com.hyewon.Coop.vo.Rq;
 
 @Controller
@@ -72,18 +75,41 @@ public class UsrProjectController {
 		}
 
 		int projectsCnt = projectService.getProjectCount(rq.getLoginedMemberId());
-
 		int itemsInAPage = 6;
-
+                                             
 		int pagesCount = (int) Math.ceil((double) projectsCnt / itemsInAPage);
 
 		List<Project> projects = projectService.getProjects(itemsInAPage, page, rq.getLoginedMemberId());
-
+                                                              
 		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("page", page);
+		model.addAttribute("projectsCnt", projectsCnt);
 		model.addAttribute("projects", projects);
 
 		return "user/project/check";
+	}
+	
+	@RequestMapping("/user/project/joinMember")
+	public String UserProjectList(Model model,
+			@RequestParam(defaultValue = "1") int page) {
+
+		if (page <= 0) {
+			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다", true);
+		}
+
+		int projectsCnt = projectService.getProjetManagerCount(rq.getLoginedMemberId());
+		int itemsInAPage = 6;
+                                             
+		int pagesCount = (int) Math.ceil((double) projectsCnt / itemsInAPage);
+
+		List<Project> projects = projectService.getProjectsManager(itemsInAPage, page, rq.getLoginedMemberId());
+                                                              
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page);
+		model.addAttribute("projectsCnt", projectsCnt);
+		model.addAttribute("projects", projects);
+
+		return "user/project/joinMember";
 	}
 	
 	@RequestMapping("/user/project/work_create")
@@ -97,9 +123,36 @@ public class UsrProjectController {
 	}
 	
 	@RequestMapping("/user/project/delete")
-	public String showProejctDelete() {
+	public String showDelete(Model model,
+			@RequestParam(defaultValue = "1") int page) {
+
+		if (page <= 0) {
+			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다", true);
+		}
+
+		int projectsCnt = projectService.getProjetManagerCount(rq.getLoginedMemberId());
+		int itemsInAPage = 6;
+                                             
+		int pagesCount = (int) Math.ceil((double) projectsCnt / itemsInAPage);
+
+		List<Project> projects = projectService.getProjectsManager(itemsInAPage, page, rq.getLoginedMemberId());
+                                                              
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page);
+		model.addAttribute("projectsCnt", projectsCnt);
+		model.addAttribute("projects", projects);
+
 		return "user/project/delete";
 	}
+	
+	@RequestMapping("/user/project/deleteProject")
+	@ResponseBody
+	public ResultData deleteProject(@PathVariable int id) {
+		projectMemberService.deleteProjectById(id);
+		projectService.deleteProject(id);
+	    return ResultData.from("S-1", "성공");	
+	}
+	
 	
 	
 }

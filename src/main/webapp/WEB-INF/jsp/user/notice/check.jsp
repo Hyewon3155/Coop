@@ -6,7 +6,7 @@
 	<section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
 			<div class="mb-2 flex justify-between items-end">
-				<div><span>총 : ${noticesCnt } 개</span></div>
+				<div class="font-semibold"><span>총 : ${noticesCnt } 개</span></div>
 			</div>
 			<div class="table-box-type-1">
 				<table class="table w-full">

@@ -43,8 +43,22 @@ public class ProjectService {
 
 	public List<Project> getProjects(int itemsInAPage, int page, int loginedMemberId) {
 		int limitStart = (page - 1) * itemsInAPage;
-		
 		return projectRepository.getProjects(limitStart, itemsInAPage, loginedMemberId);
+	}
+
+	public int getProjetManagerCount(int loginedMemberId) {
+		return projectRepository.getProjectManagerCount(loginedMemberId);
+
+	}
+
+	public List<Project> getProjectsManager(int itemsInAPage, int page, int loginedMemberId) {
+		int limitStart = (page - 1) * itemsInAPage;
+		return projectRepository.getProjectsManager(limitStart, itemsInAPage, loginedMemberId);
+	}
+
+	public void deleteProject(int id) {
+		projectRepository.deleteProject(id);
+		
 	}
 
 	

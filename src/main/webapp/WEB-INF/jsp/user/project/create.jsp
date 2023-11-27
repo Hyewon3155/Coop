@@ -42,6 +42,16 @@
     	   
   	
  </script>
+  <style>
+    nav {
+       height: 100vh;
+       width: 100%:
+    }
+    
+    body {
+    overflow: hidden; /* 스크롤바를 숨깁니다. */
+  }
+ </style>
 <nav class="bg-gray-200 py-10">
     <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <h1 class="text-2xl mb-4">새 프로젝트 만들기</h1>

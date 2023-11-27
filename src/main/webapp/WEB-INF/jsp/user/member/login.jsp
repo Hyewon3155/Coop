@@ -13,7 +13,7 @@
 	  <div class="card card-compact w-96 bg-base-100 shadow-xl">
 	    <h1 class="font-semibold text-2xl text-center pt-5">Login</h1>
 	    <div class="card-body">
-	     <form action="doLogin" method="POST">
+	     <form action="doLogin" method="POST" autocomplete="off">
 	      <h1 class="block font-semibold">ID</h1>
 	      <input class="input input-bordered w-full" type="text" name="loginId" placeholder="아이디" />
 	      <h1 class="block font-semibold">PW</h1>

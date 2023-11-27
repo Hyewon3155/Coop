@@ -1,5 +1,7 @@
 package com.hyewon.Coop.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -109,6 +111,10 @@ public class MemberService {
 	public String isFirstMember(String company) {
 		return memberRepository.isFirstMember(company);
 
+	}
+
+	public List<Member> getMemberByNameAndDepart(String searchKeywordType, String searchKeyword, String company) {
+		return memberRepository.getMemberByNameAndDepart(searchKeywordType, searchKeyword, company);
 	}
 	
 }

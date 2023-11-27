@@ -1,5 +1,7 @@
 package com.hyewon.Coop.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -106,6 +108,15 @@ public interface MemberRepository {
 				LIMIT 1
 			""")
 	public String isFirstMember(String company);
+
+	@Select("""
+			SELECT id, `name`, depart
+				FROM `member`
+				WHERE depart LIKE CONCAT('%', #{searchKeywordType}, '%')
+				AND `name` LIKE CONCAT('%', #{searchKeyword}, '%')
+				AND company = #{company}
+			""")
+	public List<Member> getMemberByNameAndDepart(String searchKeywordType, String searchKeyword, String company);
 
 	
 }
