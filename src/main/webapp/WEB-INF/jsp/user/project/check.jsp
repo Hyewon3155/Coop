@@ -40,7 +40,9 @@
             </li>
             </ul>
           <div class="mt-6 card-actions justify-end">
-      <button class="btn btn-primary">바로가기</button>
+          <a href="check_member?id=${project.id }">
+      <button class="btn btn-primary">팀원 조회하기</button>
+      </a>
     </div>
         </div>
       </div>

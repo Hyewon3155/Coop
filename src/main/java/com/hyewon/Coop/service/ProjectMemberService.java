@@ -1,5 +1,7 @@
 package com.hyewon.Coop.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,10 @@ public class ProjectMemberService {
 	public void deleteProjectById(int id) {
 		projectMemberRepository.deleteProjectById(id);
 		
+	}
+
+	public List<Integer> getProjectMembers(int id) {
+		return projectMemberRepository.getProjectMembers(id);
 	}
 	
 	

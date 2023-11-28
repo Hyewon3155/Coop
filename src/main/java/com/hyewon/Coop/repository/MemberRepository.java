@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -117,6 +118,8 @@ public interface MemberRepository {
 				AND company = #{company}
 			""")
 	public List<Member> getMemberByNameAndDepart(String searchKeywordType, String searchKeyword, String company);
+
+
 
 	
 }

@@ -116,5 +116,6 @@ public class MemberService {
 	public List<Member> getMemberByNameAndDepart(String searchKeywordType, String searchKeyword, String company) {
 		return memberRepository.getMemberByNameAndDepart(searchKeywordType, searchKeyword, company);
 	}
+
 	
 }

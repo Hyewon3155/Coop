@@ -3,6 +3,7 @@ package com.hyewon.Coop.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -78,9 +79,29 @@ public class UsrProjectMemberController {
 		 
 		 return ResultData.from("S-1", "회원 추가 성공");
 		 
-		
-		
 	}
+	
+	@RequestMapping("/user/project/check_member")
+	public String check_member(Model model, int id) {
+
+        List<Integer> memberIds = projectMemberService.getProjectMembers(id);
+        if(memberIds.isEmpty()) {
+        	Util.f("멤버를 추가해주세요", "check_member");
+        }
+    	List<Member> members = new ArrayList<>();
+
+        for (int memberId : memberIds) {
+            Member member = memberService.getMemberById(memberId); // memberId에 대한 멤버 정보를 조회합니다.
+            if (member != null) {
+                members.add(member); // 조회된 멤버 정보를 members 리스트에 추가합니다.
+            }
+        }
+        
+		model.addAttribute("members", members);
+	
+		return "user/project/check_member";
+	}
+	
 
 	
 }

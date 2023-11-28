@@ -1,5 +1,7 @@
 package com.hyewon.Coop.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -32,6 +34,13 @@ public interface ProjectMemberRepository {
 				WHERE id = #{id}
 	    	""")
 	public void deleteProjectById(int id);
+	 
+	 @Select("""
+				SELECT member_id
+				    FROM project_member
+				    WHERE project_id = #{project_id}
+				""")
+	public List<Integer> getProjectMembers(int id);
 	
 	
 
