@@ -7,7 +7,7 @@
 	  <div class="card card-compact w-96 bg-base-100 shadow-xl layer">
 	    <h1 class="font-semibold text-2xl text-center pt-5">CheckPassword</h1>
 	    <div class="card-body">
-	    <form action="doPasswordModify" method="POST">
+	    <form action="doPasswordModify" method="POST" autocomplete="off">
 	      <h1 class="block font-semibold">새 비밀번호</h1>
 	      <input class="input input-bordered mb-2 block w-full" type="text" name="loginPw" placeholder="비밀번호"/>
 	      <h1 class="block font-semibold">새 비밀번호 확인</h1>

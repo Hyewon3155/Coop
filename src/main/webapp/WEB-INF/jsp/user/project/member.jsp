@@ -86,7 +86,7 @@ function joinProjectMember() {
   </div>
 
 <div class="flex justify-around mt-10">
-         <button class="btn w-1/3 btn-warning font-bold text-base"> 뒤로가기</button> 
+         <button class="btn w-1/3 btn-warning font-bold text-base" onclick="history.back();"> 뒤로가기</button> 
       <button class="btn w-1/3 p-2 border rounded btn-success font-bold text-base" onclick="joinProjectMember();">추가하기</button> 
       </div>
       </div>

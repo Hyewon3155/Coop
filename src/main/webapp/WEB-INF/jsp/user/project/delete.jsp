@@ -64,8 +64,10 @@ function deleteProject(id) {
         <span>날짜: ${project.startDate.substring(0, 10) }~${project.endDate.substring(0, 10) }</span>
             </li>
             </ul>
-          <div class="mt-6 card-actions justify-end">
-      <button class="btn btn-primary" onclick="deleteProject(${project.id});">삭제하기</button>
+          <div class="mt-6 card-actions justify-evenly">
+      <button class="btn btn-warning" onclick="deleteProject(${project.id});">수정하기</button>
+          <button class="btn btn-primary" onclick="deleteProject(${project.id});">삭제하기</button>
+    
     </div>
         </div>
       </div>

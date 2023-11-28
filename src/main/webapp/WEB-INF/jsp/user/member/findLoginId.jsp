@@ -9,9 +9,9 @@
 	    <div class="card-body">
 	     <form action="doFindLoginId" method="POST">
 	      <h1 class="block font-semibold">이름</h1>
-	      <input class="input input-bordered w-full" type="text" name="name" placeholder="이름" />
+	      <input class="input input-bordered w-full" type="text" name="name" placeholder="이름"/>
 	      <h1 class="block font-semibold">이메일</h1>
-	      <input class="input input-bordered mb-2 block w-full" type="text" name="email" placeholder="이메일">
+	      <input class="input input-bordered mb-2 block w-full" type="text" name="email" placeholder="이메일" autocomplete="off">
 	       <button class="btn btn-warning items-center w-full mb-2">아이디 찾기</button>
 	     </form>
 	       <span class="flex justify-end"><a class="pl-2 pr-2" href="findLoginId">비밀번호 찾기</a>
