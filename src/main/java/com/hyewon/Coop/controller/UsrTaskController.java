@@ -3,12 +3,14 @@ package com.hyewon.Coop.controller;
 import java.io.IOException;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hyewon.Coop.service.TaskService;
 import com.hyewon.Coop.util.Util;
+import com.hyewon.Coop.vo.Notice;
 import com.hyewon.Coop.vo.Rq;
 
 @Controller
@@ -31,9 +33,10 @@ public class UsrTaskController {
 		return "user/myWork/create";
 	}
 	
-	@RequestMapping("/user/myWork/doCreate")
+	
+	@RequestMapping("/user/project/doWorkCreate")
 	@ResponseBody
-	public String doCreate(String title, String body, String startDate, String endDate) {
+	public String doWorkCreate(int member_id, int project_id, String title, String body, String startDate, String endDate) {
 		
 		if (Util.empty(title)) {
 			return Util.jsHistoryBack("작업명을 입력해주세요");
@@ -48,11 +51,11 @@ public class UsrTaskController {
 			return Util.jsHistoryBack("종료 날짜를 입력해주세요");
 		}
 		
-	    taskService.doCreate(rq.getLoginedMemberId(), title, body, startDate, endDate);
+	    taskService.doCreate(member_id, project_id, title, body, startDate, endDate);
 		
 		int id = taskService.getLastInsertId();
 		
-		return Util.jsReplace(Util.f("%d번 작업이 생성되었습니다", id), Util.f("/"));
+		return Util.jsReplace(Util.f("작업이 할당되었습니다"), Util.f("/"));
 
 
 		

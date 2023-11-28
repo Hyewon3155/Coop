@@ -17,8 +17,8 @@ public class TaskService {
 		this.taskRepository = taskRepository;
 	}
 	
-	public void doCreate(int id, String title, String body, String startDate, String endDate) {
-		taskRepository.doCreate(id, title, body, startDate, endDate);
+	public void doCreate(int member_id, int project_id, String title, String body, String startDate, String endDate) {
+		taskRepository.doCreate(member_id, project_id, title, body, startDate, endDate);
 	}
 	
 	public int getLastInsertId() {

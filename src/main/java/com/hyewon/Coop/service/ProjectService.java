@@ -61,6 +61,11 @@ public class ProjectService {
 		
 	}
 
+	public void doModify(String title, String body, String startDate, String endDate) {
+		projectRepository.doModify(title, body, startDate, endDate);
+		
+	}
+
 	
 	
 }

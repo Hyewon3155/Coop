@@ -9,14 +9,14 @@ public interface TaskRepository {
 
 	@Insert("""
 			INSERT INTO Task
-				SET writer = #{id},
-					title = #{title},
+				SET member_id = #{member_id},
+					project_id = #{project_id},
 					`body` = #{body},
 					startDate = #{startDate},
 					endDate = #{endDate}
 			        
 			""")
-	public void doCreate(int id, String title, String body, String startDate, String endDate);
+	public void doCreate(int member_id, int project_id, String title, String body, String startDate, String endDate);
 
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();

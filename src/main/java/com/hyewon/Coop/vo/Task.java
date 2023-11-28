@@ -13,9 +13,12 @@ public class Task {
 	private String body;
 	private String startDate;
 	private String endDate;
-	private int writer;
+	private int member_id;
 	private int project_id;
 	private int status;
+	public String getForPrintBody() {
+		return this.body.replaceAll("\n", "<br />");
+	}
 	
 
 }

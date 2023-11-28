@@ -40,8 +40,12 @@
             </li>
             </ul>
           <div class="mt-6 card-actions justify-evenly">
+                <a href="modify?id=${project.id }">
       <button class="btn btn-warning">수정하기</button>
-          <button class="btn btn-primary" onclick="deleteProject(${project.id});">삭제하기</button>
+      </a>
+      <a href="delete?id=${project.id }">
+          <button class="btn btn-error">삭제하기</button>
+          </a>
     
     </div>
         </div>

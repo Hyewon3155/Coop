@@ -45,12 +45,11 @@
                 <div class="nested-dropdown-content">
                     <a href="../project/create">프로젝트 생성</a>
                     <a href="../project/joinMember">프로젝트 팀원 추가</a>
-                    <a href="../project/work_create">프로젝트 작업 할당</a>
+                    <a href="../project/showWorkCreate">프로젝트 작업 할당</a>
                 </div>
             </div>
 
-            <a href="../project/modify">프로젝트 수정</a>
-            <a href="../project/delete">프로젝트 삭제</a>
+            <a href="../project/showDelete">프로젝트 수정/삭제</a>
         </c:if>
 
         <a href="../project/check">프로젝트 조회</a>

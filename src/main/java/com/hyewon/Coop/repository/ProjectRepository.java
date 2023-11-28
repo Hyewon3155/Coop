@@ -40,12 +40,15 @@ public interface ProjectRepository {
 	public int getProjectCount(int loginedMemberId);
 
 
-	@Insert("""
-			SELECT *
-			FROM project
-			WHERE id = #{project_id};
-			        
-			""")
+	@Select("""
+		    SELECT id, 
+		           title,
+		           `body`, 
+		           DATE_FORMAT(startDate, '%Y-%m-%d'),
+		           DATE_FORMAT(endDate, '%Y-%m-%d')
+		    FROM project
+		    WHERE id = #{project_id};
+		""")
 	public Project getProjectById(int project_id);
 
 
@@ -82,6 +85,16 @@ public interface ProjectRepository {
 			WHERE id = #{id}
     		""")
 	public void deleteProject(int id);
+
+    @Update("""
+			UPDATE project
+				SET startDate = #{startDate},
+				    endDate = #{endDate},
+					title = #{title},
+			        `body` = #{body}
+			        
+			""")
+	public void doModify(String title, String body, String startDate, String endDate);
 	
 	
 

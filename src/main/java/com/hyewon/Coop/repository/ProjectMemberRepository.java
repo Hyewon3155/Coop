@@ -31,7 +31,7 @@ public interface ProjectMemberRepository {
 
 	 @Delete("""
 	    		DELETE FROM project_member
-				WHERE id = #{id}
+				WHERE project_id = #{id}
 	    	""")
 	public void deleteProjectById(int id);
 	 

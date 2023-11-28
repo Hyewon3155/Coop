@@ -117,12 +117,7 @@ public class UsrProjectController {
 		return "user/project/work_create";
 	}
 	
-	@RequestMapping("/user/project/modify")
-	public String showProejctModify() {
-		return "user/project/modify";
-	}
-	
-	@RequestMapping("/user/project/delete")
+	@RequestMapping("/user/project/showDelete")
 	public String showDelete(Model model,
 			@RequestParam(defaultValue = "1") int page) {
 
@@ -142,15 +137,70 @@ public class UsrProjectController {
 		model.addAttribute("projectsCnt", projectsCnt);
 		model.addAttribute("projects", projects);
 
-		return "user/project/delete";
+		return "user/project/showDelete";
 	}
 	
-	@RequestMapping("/user/project/deleteProject")
+	@RequestMapping("/user/project/delete")
 	@ResponseBody
-	public ResultData deleteProject(@PathVariable int id) {
+	public String deleteProject(int id) {
 		projectMemberService.deleteProjectById(id);
 		projectService.deleteProject(id);
-	    return ResultData.from("S-1", "성공");	
+		return Util.jsReplace(Util.f("프로젝트를 삭제했습니다"), Util.f("showDelete"));
+
+	}
+	
+	@RequestMapping("/user/project/modify")
+	public String showModify(Model model, int id) {
+		Project project = projectService.getProjectById(id);
+		model.addAttribute("project", project);
+		return "user/project/modify";
+
+	}
+	
+	@RequestMapping("/user/project/doModify")
+	@ResponseBody
+	public String doModify(String title, String body, String startDate, String endDate) {
+		
+		if (Util.empty(title)) {
+			return Util.jsHistoryBack("프로젝트명을 입력해주세요");
+		}
+		if (Util.empty(body)) {
+			return Util.jsHistoryBack("프로젝트 설명을 입력해주세요");
+		}
+		if (Util.empty(startDate)) {
+			return Util.jsHistoryBack("시작 날짜를 입력해주세요");
+		}
+		if (Util.empty(endDate)) {
+			return Util.jsHistoryBack("마감 날짜를 입력해주세요");
+		}
+		
+	    projectService.doModify(title, body, startDate, endDate);
+	    return Util.jsReplace(Util.f("게시물이 수정되었습니다"), Util.f("check"));
+
+
+		
+	}
+	@RequestMapping("/user/project/showWorkCreate")
+	public String showWorkCreate(Model model,
+			@RequestParam(defaultValue = "1") int page) {
+
+		if (page <= 0) {
+			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다", true);
+		}
+
+		int projectsCnt = projectService.getProjetManagerCount(rq.getLoginedMemberId());
+		int itemsInAPage = 6;
+                                             
+		int pagesCount = (int) Math.ceil((double) projectsCnt / itemsInAPage);
+
+		List<Project> projects = projectService.getProjectsManager(itemsInAPage, page, rq.getLoginedMemberId());
+                                                              
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page);
+		model.addAttribute("projectsCnt", projectsCnt);
+		model.addAttribute("projects", projects);
+
+		return "user/project/showWorkCreate";
 	}
 	
 	

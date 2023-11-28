@@ -77,7 +77,7 @@
           </label>
 
 <div class="flex justify-around mt-10">
-         <button class="btn w-1/3 btn-warning font-bold text-base"> 뒤로가기</button> 
+         <button class="btn w-1/3 btn-warning font-bold text-base" onclick="history.back();"> 뒤로가기</button> 
       <button class="btn w-1/3 p-2 border rounded btn-success font-bold text-base">프로젝트 생성</button> 
       </div>
       </form>    
