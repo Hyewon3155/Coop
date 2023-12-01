@@ -112,11 +112,6 @@ public class UsrProjectController {
 		return "user/project/joinMember";
 	}
 	
-	@RequestMapping("/user/project/work_create")
-	public String showProejct_WorkCreate() {
-		return "user/project/work_create";
-	}
-	
 	@RequestMapping("/user/project/showDelete")
 	public String showDelete(Model model,
 			@RequestParam(defaultValue = "1") int page) {
@@ -203,6 +198,51 @@ public class UsrProjectController {
 		return "user/project/showWorkCreate";
 	}
 	
+	@RequestMapping("/user/myWork/projectForModify")
+	public String projectForModify(Model model,
+			@RequestParam(defaultValue = "1") int page) {
+
+		if (page <= 0) {
+			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다", true);
+		}
+
+		int projectsCnt = projectService.getProjetManagerCount(rq.getLoginedMemberId());
+		int itemsInAPage = 6;
+                                             
+		int pagesCount = (int) Math.ceil((double) projectsCnt / itemsInAPage);
+
+		List<Project> projects = projectService.getProjectsManager(itemsInAPage, page, rq.getLoginedMemberId());
+                                                              
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page);
+		model.addAttribute("projectsCnt", projectsCnt);
+		model.addAttribute("projects", projects);
+
+		return "user/myWork/projectForModify";
+	}
 	
-	
+	@RequestMapping("/user/project/showProjectForRef")
+	public String showProjectForRef(Model model,
+			@RequestParam(defaultValue = "1") int page) {
+		if (page <= 0) {
+			return rq.jsReturnOnView("페이지번호가 올바르지 않습니다", true);
+		}
+
+		int projectsCnt = projectService.getProjectCount(rq.getLoginedMemberId());
+		int itemsInAPage = 6;
+                                             
+		int pagesCount = (int) Math.ceil((double) projectsCnt / itemsInAPage);
+
+		List<Project> projects = projectService.getProjects(itemsInAPage, page, rq.getLoginedMemberId());
+                                                              
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page);
+		model.addAttribute("projectsCnt", projectsCnt);
+		model.addAttribute("projects", projects);
+
+		return "user/project/showProjectForRef";
+		}
 }
+	
+	
+	

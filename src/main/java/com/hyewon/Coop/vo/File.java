@@ -7,19 +7,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
+public class File {
 	private int id;
 	private String title;
 	private String body;
-	private String startDate;
-	private String endDate;
-	private String finishDate;
+	private String regDate;
+	private String updateDate;
+	private String writerName;
 	private int member_id;
 	private int project_id;
-	private int status;
-	private String projectName;
-	private String memberName;
-	private String memberDepart;
+	private String file_savedPath;
 	public String getForPrintBody() {
 		return this.body.replaceAll("\n", "<br />");
 	}

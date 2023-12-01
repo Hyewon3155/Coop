@@ -127,73 +127,7 @@ html > body {
   left: 0;
 }
 
-table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-        table {
-            width: 100%;
-        }
 
-      .task-container {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            width: 80%; /* 약간의 여유를 위해 60%로 변경 */
-            margin: 20px auto;
-        }
-        .task-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-      .task-group {
-            margin-top: 5px;
-            display: flex;
-        }
-
-     .task-title {
-            flex-basis: 40%; /* 웹사이트 개편과 작업명의 너비 */
-            flex-grow: 0;
-            flex-shrink: 0;
-            padding: 10px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        .task-person {
-            flex-basis: 30%; /* 담당자와 담당자: 김철수의 너비 */
-            flex-grow: 0;
-            flex-shrink: 0;
-            padding: 10px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-        .profile-images {
-            display: flex;
-            gap: 5px;
-        }
-        img {
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-        }
-        .priority {
-            padding: 2px 8px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            background-color: #e5e5e5;
-        }
-        .high { color: #d32f2f; }
-        .medium { color: #fbc02d; }
-        .low { color: #4caf50; }
 .board-container {
     max-width: 800px;
     margin: 20px auto;
@@ -226,28 +160,6 @@ table, th, td {
     font-size: 0.9em;
 }
 
-
-
-
-.work-grid-container {
-  height:100%;
-  width:100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 두 열로 구성 */
-  grid-template-rows: 1fr 1fr; /* 두 행으로 구성 */
-  gap: 10px; /* 그리드 간격 */
-}
-
-.item1 {
-  grid-column: 1; /* 1열 전체 차지 */
-  grid-row: 1 / span 2; /* 1행부터 시작하여 2행까지 차지 */
-}
-
-.item2 {
-  grid-column: 2; /* 2열 전체 차지 */
-  grid-row: 1 / span 2; /* 1행부터 시작하여 2행까지 차지 */
-}
-
 .table-box-type-1 > table {
 	width: 100%;
 }
@@ -259,8 +171,25 @@ table, th, td {
 	
 }
 
+.horizontal-border-only {
+    border-collapse: collapse;
+}
+
+.horizontal-border-only th{
+	 border-left: none;
+    border-right: none;
+}
+
+.horizontal-border-only td {
+    border-left: none;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    
+}
 
 
-
-
+.horizontal-border-only tr:last-child th,
+.horizontal-border-only tr:last-child td {
+    border-bottom: 2px solid white;
+}
 

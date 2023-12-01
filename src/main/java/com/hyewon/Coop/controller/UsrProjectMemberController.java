@@ -123,6 +123,28 @@ public class UsrProjectMemberController {
 		return "user/project/check_member";
 	}
 	
+	@RequestMapping("/user/myWork/memberForModify")
+	public String memberForModify(Model model, int id) {
+
+        List<Integer> memberIds = projectMemberService.getProjectMembers(id);
+        if(memberIds.isEmpty()) {
+        	Util.f("멤버를 추가해주세요", "check_member");
+        }
+    	List<Member> members = new ArrayList<>();
+
+        for (int memberId : memberIds) {
+            Member member = memberService.getMemberById(memberId); // memberId에 대한 멤버 정보를 조회합니다.
+            if (member != null) {
+                members.add(member); // 조회된 멤버 정보를 members 리스트에 추가합니다.
+            }
+        }
+        
+		model.addAttribute("members", members);
+		model.addAttribute("project_id", id);
+	
+		return "user/myWork/memberForModify";
+	}
+	
 	
 
 	

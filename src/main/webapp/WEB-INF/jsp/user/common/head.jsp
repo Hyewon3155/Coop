@@ -45,7 +45,6 @@
                 <div class="nested-dropdown-content">
                     <a href="../project/create">프로젝트 생성</a>
                     <a href="../project/joinMember">프로젝트 팀원 추가</a>
-                    <a href="../project/showWorkCreate">프로젝트 작업 할당</a>
                 </div>
             </div>
 
@@ -57,12 +56,15 @@
 </div>
            
             <div class="dropdown">
-                <a href="#">할 일 보기</a>
-                <div class="dropdown-content">
-                    <a href="../myWork/check">할 일 목록</a>
-                    <a href="../myWork/create">할 일 추가</a>
-                    <a href="../myWork/modify">할 일 수정</a>
-                    <a href="../myWork/delete">할 일 삭제</a>
+                <a href="#">프로젝트 작업</a>
+                <div class="dropdown-content"> 
+                <c:if test="${rq.loginedMember.position == 1}">
+                	 <a href="../project/showWorkCreate">프로젝트 작업 할당</a>
+                	 <a href="../myWork/projectForModify">프로젝트 작업 수정</a> 
+                	 <a href="../myWork/delete">프로젝트 작업 삭제</a>
+                </c:if>
+                    <a href="../myWork/check">프로젝트 작업 목록</a>
+                    <a href="../project/showProjectForRef">프로젝트 작업물</a>
                 </div>
             </div>
             <a href="/user/member/mypage">마이페이지</a>

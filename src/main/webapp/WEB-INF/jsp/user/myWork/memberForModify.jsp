@@ -2,7 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="프로젝트 생성" />
 <%@ include file="../common/head.jsp" %>
+<script>
+	var project_id = document.getElementById("project_id").value;
+	document.getElementsByName("project_id")[0].value = project_id;
 
+</script>
  <style>
     nav {
        height: 100vh;
@@ -10,6 +14,7 @@
     }
  </style>
 <nav class="bg-gray-200 py-10">
+	<input type="hidden" name="project_id" value="${project_id}" id="project_id"/>
     <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
          <div class="table-box-type-1">
 				<table class="table w-full">
@@ -27,10 +32,9 @@
 					</thead>
 					<tbody>
 						<c:forEach  items="${members}" var="member">
-						<input type="hidden" name="project_id" value="${project_id}"/>
 							<tr>
 								<td>${member.id}</td>
-								<td><a class="hover:underline" href="work_create?member_id=${member.id}&project_id=${project_id}">${member.name}</a></td>
+								<td><a class="hover:underline" href="workForModify?member_id=${member.id}&project_id=${project_id}">${member.name}</a></td>
 								<td>${member.depart}</td>
 							</tr>
 						</c:forEach>
