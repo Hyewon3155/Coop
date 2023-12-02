@@ -40,7 +40,7 @@
             </li>
             </ul>
           <div class="mt-6 card-actions justify-end">
-          <a href="../myWork/reference?id=${project.id }">
+          <a href="../myWork/referenceCheck?id=${project.id }">
       <button class="btn btn-primary">프로젝트 작업물 조회</button>
       </a>
     </div>

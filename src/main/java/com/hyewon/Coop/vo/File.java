@@ -14,6 +14,8 @@ public class File {
 	private String regDate;
 	private String updateDate;
 	private String writerName;
+	private String departName;
+	private String original_fileName;
 	private int member_id;
 	private int project_id;
 	private String file_savedPath;
