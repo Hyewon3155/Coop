@@ -49,9 +49,9 @@
       </label>
 	      <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
 	        <li><a href="/user/member/doLogout">로그아웃</a></li>
-	        <li><a href="/user/group/create">루틴 생성하기</a></li>
-	        <li><a href="/user/member/schedule">내 스케줄보기</a></li>
-	        <li><a href="/user/member/codeEditor">내 코드보기</a></li>
+	        <li><a href="/user/group/create">학점 관리</a></li>
+	        <li><a href="/user/member/schedule">과목 추가</a></li>
+	        <li><a href="/user/member/codeEditor">프로필 관리</a></li>
 	      </ul>
     </div>
   </div>
