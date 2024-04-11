@@ -3,26 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="My_page" />
 <%@ include file="../common/head.jsp" %>
-<script>
-	function isFirstMember(){
-		$.get('isFirstMember', {
-			 company : '${rq.loginedMember.company}',
-			 loginId : '${rq.loginedMember.loginId}',
-		}, function(data) {
-			if (data.success) {
-				 var element = document.getElementById("pw_div");
-				  element.style.display = "block";				
-			} else {
-			}
-			
-			
-		}, 'json');
-	  
-	}
-	$(document).ready(function() {
-	    isFirstMember();
-	 });
-</script>
+<h1 class="font-semibold text-2xl text-center pt-5">MYPAGE</h1>
+
+
 <section class="mt-5 flex container mx-auto justify-center">
   <div class="mx-auto">
     <h1 class="block font-semibold mb-2">ID</h1>
@@ -33,28 +16,11 @@
       <i class="fa-solid fa-user-lock mr-2"></i>
       <span>${rq.loginedMember.regDate}</span>
       <hr class="mt-2">
-      <h1 class="block font-semibold mb-2">회사</h1>
+      <h1 class="block font-semibold mb-2">그룹</h1>
       <i class="fa-solid fa-people-group mr-2"></i>
-      <span>${rq.loginedMember.company }</span>
-      <hr class="mt-2">
-      <div class="hidden" id="pw_div">
-	      <h1 class="block font-semibold mb-2 mt-2">회사 비밀번호</h1>
-		  <i class="fa-solid fa-user-lock mr-2"></i>
-		   <span>${rq.loginedMember.pw }</span> 
-      	 <hr class="mt-2">
-      </div>
-      <h1 class="block font-semibold mb-2">직급</h1>
-      <i class="bi bi-person-vcard mr-2"></i>
-      <c:if test="${rq.loginedMember.position == 1  }">
-        <span>부장 이상</span>
-       </c:if>
-      <c:if test="${rq.loginedMember.position == 0  }">
-        <span>부장 미만</span>
-       </c:if>
-      <hr class="mt-2">
-      <h1 class="block font-semibold mb-2">부서</h1>
-      <i class="bi bi-person-vcard mr-2"></i>
-      <span>${rq.loginedMember.depart }</span>
+      <c:if test="${rq.loginedMember.study_group == null  }"/>
+        <span>가입한 그룹이 없습니다.</span>
+      <span>${rq.loginedMember.study_group }</span>
       <hr class="mt-2">
       <h1 class="block font-semibold mb-2 mt-2">이름</h1>
       <i class="fas fa-user mr-2"></i>

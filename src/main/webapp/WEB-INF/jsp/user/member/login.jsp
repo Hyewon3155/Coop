@@ -3,17 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="Login" />
 <%@ include file="../common/head.jsp" %>
-<style>
-  /* body에 대한 스타일은 여기에서 재정의합니다. */
-  body {
-    overflow: hidden; /* 스크롤바를 숨깁니다. */
-  }
-</style>
 	<div class="login_bg_img">
 	  <div class="card card-compact w-96 bg-base-100 shadow-xl">
 	    <h1 class="font-semibold text-2xl text-center pt-5">Login</h1>
 	    <div class="card-body">
-	     <form action="doLogin" method="POST" autocomplete="off">
+	     <form action="doLogin" method="POST">
 	      <h1 class="block font-semibold">ID</h1>
 	      <input class="input input-bordered w-full" type="text" name="loginId" placeholder="아이디" />
 	      <h1 class="block font-semibold">PW</h1>

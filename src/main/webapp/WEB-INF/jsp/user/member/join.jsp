@@ -6,18 +6,6 @@
 
 <script>
 	let validLoginId = '';
-	let validPw = '';
-	
-	function handleSubmit() {
-	    var selectElement = document.getElementById('position_level');
-	    var selectedValue = parseInt(selectElement.value, 10); // 문자열을 정수로 변환
-
-	    // 여기서 selectedValue를 사용하여 원하는 처리를 할 수 있습니다.
-	    console.log("선택된 직급 값:", selectedValue);
-
-	    // 폼 제출을 막기 위해 false를 반환합니다. 실제 사용시에는 필요에 따라 변경하세요.
-	    return false;
-	}
 
 	function join_submitForm(form) {
 		
@@ -61,13 +49,6 @@
 		if (form.name.value.length == 0) {
 			alert('이름을 입력해주세요');
 			form.name.focus();
-			return;
-		}
-		
-		form.company.value = form.company.value.trim();
-		if (form.company.value.length == 0) {
-			alert('회사명을 입력해주세요');
-			form.company.focus();
 			return;
 		}
 		
@@ -120,74 +101,13 @@
 			
 		}, 'json');
 	}
-	  function companyDupCheck(event)  {
-		  event.value = event.value.trim();
-		  let replyContent = $("#open");
-          if(event.value.length == 0){
-        	  alert('회사 이름을 입력해주세요');
-        	  return;
-          }
-		  $.get('companyDupCheck', {
-				company : event.value,
-			}, function(data) {
-					if (data.success) {
-		    		      let addHtml = `<h1 class="block font-semibold mb-2 mt-2" id="pw_div">회사 비밀번호</h1>
-		    		          			 <i class="fa-solid fa-user-lock mr-2"></i>
-		    		          		      <input type="text" name="pw" placeholder="회사 비밀번호" onblur="pwCheck(this);">
-		    	                         <div id="pwCheckMsg" class="text-sm mt-2 h-5 text-red-500"></div>
-	
-		    				               `;
-		      	          replyContent.after(addHtml);
-
-	
-		    	   
-					} else {
-		    		      let addHtml = `<h1 class="block font-semibold mb-2 mt-2" id="pw_div">회사 비밀번호 설정</h1>
-			          			 <i class="fa-solid fa-user-lock mr-2"></i>
-		          		      <input type="text" name="pw" placeholder="회사 비밀번호를 설정해주세요">
-		    				               `;
-		      	          replyContent.after(addHtml);
-	
-					}
-
-				
-			}, 'json');
-		  
-     }
-	  
-	  function pwCheck(event){
-		    let company = $('#company').val(); // 회사 이름 가져오기
-		    console.log(company);
-
-			let pwCheckMsg = $('#pwCheckMsg');
-
-			$.get('pwCheck', {
-				pw : event.value,
-				company: company,
-			}, function(data) {
-				if (data.success) {
-					pwCheckMsg.removeClass('text-red-500');
-					pwCheckMsg.addClass('text-green-500');
-					pwCheckMsg.html(`<span>\${data.msg }</span>`);
-					validPw = data.data1;
-					
-				} else {
-					pwCheckMsg.removeClass('text-green-500');
-					pwCheckMsg.addClass('text-red-500');
-					pwCheckMsg.html(`<span>\${data.msg }</span>`);
-					validPw = '';
-				}
-				
-			}, 'json');
-		  
-	  }
 	  
 
 </script>
 
 <section class="mt-5 flex container mx-auto justify-center overflow-hidden">
   <div class="mx-auto">
-   <form action="doJoin" method="POST" onsubmit="join_submitForm(this); return false;" autocomplete="off">
+   <form action="doJoin" method="POST" onsubmit="join_submitForm(this); return false;">
     <h1 class="block font-semibold mb-2">ID</h1>
       <i class="fas fa-user mr-2"></i>
       <input type="text" name="loginId" placeholder="아이디" onblur="loginIdDupCheck(this);" />
@@ -204,29 +124,6 @@
       <h1 class="block font-semibold mb-2 mt-2">NAME</h1>
       <i class="fas fa-user mr-2"></i>
       <input type="text" name="name" placeholder="이름">
-      <hr class="mt-2">
-      <h1 class="block font-semibold mb-2 mt-2">COMPANY</h1>
-      <i class="bi bi-building mr-2"></i>
-      <input type="text" name="company" id="company" placeholder="회사명" onblur="companyDupCheck(this);">
-      <hr class="mt-2" id="open">
-       <h1 class="block font-semibold mb-2 mt-2">POSITION</h1>
-      <select class="select select-bordered select-sm w-full max-w-xs" id="position_level" name="position">
-       <option value=1>부장 이상</option>
-       <option value=0>부장 미만</option>
-      </select>
-      <hr class="mt-2">
-       <h1 class="block font-semibold mb-2 mt-2">DEPARTMENT</h1>
-      <select name="depart" class="select select-bordered select-sm w-full max-w-xs">
-       <option value="인사부">인사부</option>
-       <option value="재무부">재무부</option>
-       <option value="운영부">운영부</option>
-       <option value="마케팅부">마케팅부</option>
-       <option value="영업부">영업부</option>
-       <option value="IT부">IT부</option>
-       <option value="연구개발부">연구개발부</option>
-        <option value="생산부">생산부</option>
-        <option value="고객관리부">고객관리부</option>     
-      </select>
       <hr class="mt-2">
       <h1 class="block font-semibold mb-2 mt-2">NICKNAME</h1>
       <i class="fas fa-user mr-2"></i>

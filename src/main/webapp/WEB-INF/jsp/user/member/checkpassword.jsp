@@ -8,7 +8,7 @@
 	    <h1 class="font-semibold text-2xl text-center pt-5">CheckPassword</h1>
 	    <div class="card-body">
 	      <h1 class="block font-semibold">ID</h1>
-	      <form action="doCheckPassword" method="POST" autocomplete="off">
+	      <form action="doCheckPassword" method="POST">
 	      <span class="flex justify-center text-2xl font-semibold">${rq.loginedMember.loginId }</span>
 	      <h1 class="block font-semibold">PW</h1>
 	      <input class="input input-bordered mb-2 block w-full" type="text" name="loginPw" placeholder="비밀번호">
