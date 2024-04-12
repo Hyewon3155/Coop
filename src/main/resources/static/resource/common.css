@@ -26,6 +26,7 @@ html, body {
 }
 
 .main_bg_img {
+	overflow: hidden;
     background-color: #ABDEE6;
      font-size:2.5rem;
      text-align: center;

@@ -1,215 +1,148 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="SCHEDULE" />
+<c:set var="pageTitle" value="작업 조회" />
 <%@ include file="../common/head.jsp" %>
- <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-<!-- Add the evo-calendar.js for.. obviously, functionality! -->
-<script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
-<div id="calendar"></div>
- <script>
-         var i = 0;
+<script>
+</script>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+   
+}
+.work-grid-container {
+  height:100%;
+  width:100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 10px;
+}
 
-		 $("#calendar").evoCalendar();
-		
-		var active_date = $('#calendar').evoCalendar('getActiveDate');
-		
-		$('#calendar').evoCalendar('selectDate', active_date);
-		
-		$('#calendar').evoCalendar('addCalendarEvent', {
-		   id: 'kNybja6',
-		   name: 'Mom\'s Birthday',
-		   description: 'Lorem ipsum dolor sit..',
-		   date: active_date,
-		   type: 'birthday'
-		});
-		
-		
-		$('#calendar').evoCalendar('toggleEventList');
-		
-		$('#calendar').on('selectDate', function(event, newDate, oldDate) {
-			alert(active_date);
-			$('.layer-bg').show();
-			$('.layer_change').show();
-			$('.close-btn').click(function(){
-				$('.layer-bg').hide();
-				$('.layer_change').hide();
-//				$('.layer-bg, .layer').css('display', 'none');
-			})
-			$('.close-x-btn').click(function(){
-				$('.layer-bg').hide();
-				$('.layer_change').hide();
-//				$('.layer-bg, .layer').css('display', 'none');
-			})
-			$('.add-back-btn').click(function(){
-				$('.layer_add').hide();
-//				$('.layer-bg, .layer').css('display', 'none');
-			})
-			$('.add-close-x-btn').click(function(){
-				$('.layer_add').hide();
-//				$('.layer-bg, .layer').css('display', 'none');
-			})
-			$('.modify-back-btn').click(function(){
-				$('.layer_modify').hide();
-//				$('.layer-bg, .layer').css('display', 'none');
-			})
-			$('.modify-close-x-btn').click(function(){
-				$('.layer_modify').hide();
-//				$('.layer-bg, .layer').css('display', 'none');
-			})
-			$('.delete-back-btn').click(function(){
-				$('.layer_delete').hide();
-//				$('.layer-bg, .layer').css('display', 'none');
-			})
-			$('.delete-close-x-btn').click(function(){
-				$('.layer_delete').hide();
-//				$('.layer-bg, .layer').css('display', 'none');
-			})
-			
-			
-			$('#add').click(function(){
-				$('.layer_add').show();
-		    })
-		    $('#modify').click(function(){
-				$('.layer_modify').show();
-		    })
-		    $('#delete').click(function(){
-				$('.layer_delete').show();
-		    })
-			
-			
-		});
-		 var new_date = '';
-		 var rand_id = Math.floor(Math.random() * 1001);
-		 var event_name = '';
-		 var event_body = '';
-		 function add(form){
-			    var str = new Date(form.event_date.value);
-			    var month = str.getMonth()+1;
-			    var day = str.getDate();
-			    var year = str.getFullYear();
-			    var options = { month: 'long'};
-			    var real_month = new Intl.DateTimeFormat('en-US', options).format(str).substr(0,3);
-			    new_date = real_month + ' ' + day + ', ' + year;
-			    event_name = form.event_name.value.trim();
-			    event_body = form.event_body.value.trim();
-			    if(  new_date == null ){
-			    	alert('날짜를 선택해주세요');
-			    	form.event_date.focus();
-			    	return;
-			    }
-			    if( event_name.length == 0 ){
-			        alert('일정 이름을 입력해주세요');
-			        form.event_name.focus();
-			        return;
-			    }
-			    if( event_body.length == 0 ){
-			    	alert('일정 내용을 입력해주세요');
-			    	form.event_body.focus();
-			    	return;
-			    }
-			    i = 1;
-			    form.event_color.value = "#63d867";
-			    form.id.value = rand_id;
-			    form.submit();
-		 }
-		 
-			$('#calendar').evoCalendar('addCalendarEvent', {
-		           id: rand_id,
-				   name: event_name,
-				   description: event_body,
-				   date: new_date,
-				   color: "#63d867"
-		    });
-		
-	
- </script>
-    <div class="layer-bg"></div>
-	<div class="layer_change">
-		<h1 class="text-gray-400">일정 변경</h1>
-		<span class="close-x-btn">&times;</span>
-		<div class="flex justify-center">
-		     <button class="btn btn-info w-full text-white mt-8" id="add">추가</button>
-		</div>
-		<div class="flex justify-center">
-		     <button class="btn btn-success w-full text-white" id="modify">수정</button>
-		</div>
-		<div class="flex justify-center">
-		     <button class="btn btn-error w-full text-white" id="delete">삭제</button>				
-		</div>
-		<button class="close-btn btn btn-active" id="close">CLOSE</button>				
-    </div>
-    <div class="layer_add">	
-        <h1 class="text-gray-400">일정 추가</h1>
-		<span class="add-close-x-btn">&times;</span> 
-		<form action="addSchedule" method="POST" onsubmit="add(this); return false;">
-		<input type="text" name="id" class="hidden"/>
-		<input type="text" name="event_color" class="hidden"/>
-		<div class="flex text-black items-center text-sm mt-7">
-		   <h1>이벤트 날짜</h1>
-		</div>
-			<div class="flex justify-center text-black">
-			   <input type="date" name="event_date" class="input input-bordered"/>
-			</div>
-			<h1 class="text-black mt-5 text-sm">일정제목</h1>
-			<div class="flex justify-center text-black">
-			   <input type="text" name="event_name" class="input input-bordered w-full" placeholder="일정 제목을 입력해주세요"/>		   
-			</div>
-			<h1 class="text-black mt-5 text-sm">일정내용</h1>
-			<div class="flex justify-center text-black">
-			   <input type="text" name="event_body" class="input input-bordered w-full" placeholder="일정 내용을 입력해주세요"/>		   
-			</div>
-			<button class="btn btn-active">추가하기</button>
-		</form>
-	    <button class="add-back-btn btn btn-active" id="close">뒤로가기</button>					
-    </div>
-    <div class="layer_modify">	
-        <h1 class="text-gray-400">일정 수정</h1>
-		<span class="modify-close-x-btn">&times;</span> 
-		<form method="POST" onsubmit="add(this); return false;">
-		<div class="flex text-black items-center text-sm mt-7">
-		   <h1>이벤트 날짜</h1>
-		</div>
-			<div class="flex justify-center text-black">
-			   <input type="date" name="modify_date" class="input input-bordered"/>
-			</div>
-			<h1 class="text-black mt-5 text-sm">일정제목</h1>
-			<div class="flex justify-center text-black">
-			   <input type="text" name="modify_schedule_name" class="input input-bordered w-full" placeholder="일정 제목을 입력해주세요"/>		   
-			</div>
-			<h1 class="text-black mt-5 text-sm">일정내용</h1>
-			<div class="flex justify-center text-black">
-			   <input type="text" name="modify_schedule_body" class="input input-bordered w-full" placeholder="일정 내용을 입력해주세요"/>		   
-			</div>
-			<button class="btn btn-active">수정하기</button>
-		</form>
-	    <button class="modify-back-btn btn btn-active" id="close">뒤로가기</button>					
-    </div>
-    <div class="layer_delete">	
-        <h1 class="text-gray-400">일정 삭제</h1>
-		<span class="delete-close-x-btn">&times;</span> 
-		<form method="POST" onsubmit="add(this); return false;">
-		<div class="flex text-black items-center text-sm mt-7">
-		   <h1>이벤트 날짜</h1>
-		</div>
-			<div class="flex justify-center text-black">
-			   <input type="date" name="delete_date" class="input input-bordered"/>
-			</div>
-			<h1 class="text-black mt-5 text-sm">일정제목</h1>
-			<div class="flex justify-center text-black">
-			   <input type="text" name="delete_schedule_name" class="input input-bordered w-full" placeholder="일정 제목을 입력해주세요"/>		   
-			</div>
-			<h1 class="text-black mt-5 text-sm">일정내용</h1>
-			<div class="flex justify-center text-black">
-			   <input type="text" name="delete_schedule_body" class="input input-bordered w-full" placeholder="일정 내용을 입력해주세요"/>		   
-			</div>
-			<button class="btn btn-active">추가하기</button>
-		</form>
-	    <button class="delete-back-btn btn btn-active" id="close">뒤로가기</button>					
-    </div>
- <%@ include file="../common/foot.jsp" %>
- 
- 
- 
+.item1 {
+  grid-column: 1; /* 1열 전체 차지 */
+  grid-row: 1 / span 2; /* 1행부터 시작하여 2행까지 차지 */
+}
+
+.item2 {
+  grid-column: 2; /* 2열 전체 차지 */
+  grid-row: 1 / span 2; /* 1행부터 시작하여 2행까지 차지 */
+}
+
+    table, th, td {
+        border: none;
+        border-collapse: collapse;
+        text-align: center;
+    }
   
-  
+
+</style>
+<div class="work-grid-container">
+  <div class="item1">
+    <div class="card w-full h-full bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="text-3xl font-bold">성적집계내역</h2>
+        <div class="overflow-x-auto shadow-xl">
+  <table class="table w-full horizontal-border-only">
+  <colgroup>
+  						<col width="20"/>
+						<col width="20"/>
+						<col width="20"/>
+						<col width="20"/>
+						<col width="20"/>
+						<col width="20"/>
+						<col width="20"/>
+						<col width="20"/>
+					</colgroup>
+    <!-- head -->
+    <thead>
+      <tr>
+       <th class="bg-blue-300 text-lg text-white">순번</th>
+       <th class="bg-blue-300 text-lg text-white">학년도</th>
+       <th class="bg-blue-300 text-lg text-white">학기</th>
+      <th class="bg-blue-300 text-lg text-white">이수학년</th>
+        <th class="bg-blue-300 text-lg text-white">신청학점</th>
+        <th class="bg-blue-300 text-lg text-white">취득학점</th>
+        <th class="bg-blue-300 text-lg text-white">평점계</th>
+        <th class="bg-blue-300 text-lg text-white">백분위점수</th>
+      </tr>
+    </thead>
+    <tbody  id="tableBodyId">
+            <c:forEach items="${toDos}" var="toDo" varStatus="status" >          
+    <input type="hidden" value="${toDo.title }" id="toDoId"/>
+      <!-- row 1 -->
+      <tr>
+        <td class="bg-gray-100 font-normal">${status.index + 1}</td>
+        <td class="bg-gray-100 font-normal">${toDo.startDate.substring(0, 10) }</td>
+        <td class="bg-gray-100 font-normal">${toDo.endDate.substring(0, 10) }</td>
+        <td class="bg-gray-100 font-normal">${toDo.projectName }</td>
+        <td class="bg-gray-100">${toDo.title }</td>
+        <c:choose>
+    		<c:when test="${toDo.status == 1}">
+    			<td class="bg-yellow-200">
+    			   <button class="statusChangeBtn" data-id="${toDo.id}" data-new-status="2">생성 완료</button>
+    			</td>
+    		</c:when>
+    		<c:when test="${toDo.status == 2}">
+    		    <td class="bg-red-200">
+    		      <button class="statusChangeBtn" data-id="${toDo.id}" data-new-status="3">작업중</button>
+    		    </td>
+    		</c:when>
+		    <c:otherwise>
+		    </c:otherwise>
+		</c:choose>
+		      </tr>
+		    </c:forEach>
+    </tbody>
+  </table>
+</div>
+      </div>
+    </div>
+  </div>
+    <div class="item2">
+    <div class="card w-full h-full bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="text-3xl font-bold">학기별 성적</h2>
+           <div class="overflow-x-auto shadow-xl text-xl">
+  <table class="table w-full horizontal-border-only">
+    <colgroup>
+    					<col width="20"/>
+    					<col width="20"/>
+    					<col width="20"/>
+						<col width="50"/>
+						<col width="20"/>
+						<col width="20"/>
+						<col width="20"/>
+					</colgroup>
+    <thead>
+      <tr>
+      <th class="bg-blue-300 text-lg text-white">순번</th>
+      <th class="bg-blue-300 text-lg text-white">학년도</th>
+      <th class="bg-blue-300 text-lg text-white">이수구분</th>
+      <th class="bg-blue-300 text-lg text-white">교과목명</th>
+      <th class="bg-blue-300 text-lg text-white">학점</th>
+        <th class="bg-blue-300 text-lg text-white">등급</th>
+        <th class="bg-blue-300 text-lg text-white">평점</th>
+      </tr>
+    </thead>
+   <c:forEach items="${Dones}" var="Done" varStatus="status">
+    <tbody>
+      <!-- row 1 -->
+      <tr>
+        <th>${status.index + 1 }</th>
+        <th>${Done.projectName }</th>
+        <td>${Done.title }</td>
+        <td class="bg-green-200">작업 완료</td>
+      </tr>
+    </tbody>
+    </c:forEach>
+  </table>
+</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<%@ include file="../common/foot.jsp" %>

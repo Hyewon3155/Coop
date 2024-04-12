@@ -1,187 +1,96 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="codeEditor" />
-<%@include file="../common/head.jsp" %>
-  <div class="container">
-     <div id="editor-container">
-      <div class="navbar bg-neutral text-neutral-content flex justify-end" id="button-container">
-	  <button class="btn btn-active" onclick="alerty()">
-	  <i class="bi bi-play"></i>
-	   실행
-	  </button>
-	   <button class="btn btn-active" onclick="back()">
-	   <i class="bi bi-arrow-clockwise pr-2"></i>
-	    재실행
-	   </button>
-	   <button class="btn btn-active" onclick="start()">
-	    <i class="bi bi-arrow-counterclockwise pr-2"></i>
-	    실행취소
-	    </button>
-	     <button class="btn btn-active flex justify-end">
-		   <i class="bi bi-save pr-2"></i>
-		   저장
-	  	</button>
-	  	</div>
-	  	<div class="tabs bg-gray-500">
-            <a class="tab tab-lifted text-white">HTML</a> 
-        </div>
-	       <div id="editor3" class="editable"></div>
-	    <div class="tabs bg-gray-500">
-            <a class="tab tab-lifted text-white">CSS</a> 
-        </div>
-		   <div id="editor2" class="editable"></div>
-		<div class="tabs bg-gray-500">
-            <a class="tab tab-lifted text-white">JS</a> 
-        </div>
-		   <div id="editor1"  class="editable"></div>
+<c:set var="pageTitle" value="학점 정보 추가" />
+<%@ include file="../common/head.jsp" %>
+ <nav class="pb-10 h-full">
+ <div class="w-3/4 mx-auto">
+     <h2 class="font-bold text-2xl mt-10">학점 정보 추가</h2>
      </div>
-	  <iframe class="preview" id="preview-vw" name="preview"></iframe>
+    <div class="w-3/4 mx-auto bg-white p-3 rounded-lg shadow-md mt-10">
+    <div class="table-box-type-1">
+				<table class="table w-full">
+					<colgroup>
+						<col width="200"/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>교과목명</th>
+							<td><input class="input input-bordered w-2/4 ml-2" type="text" name="name" placeholder="교과목명을 입력해주세요" /></td>
+						</tr>
+ 						<tr>
+							<th>이수구분</th>
+							<td>
+								<select class="select select-ghost w-full max-w-xs ml-2">
+								     <option disabled selected>이수구분</option>
+								    <option value="startDateAsc">교양필수</option>
+								    <option value="startDateDesc">교양선택</option>
+								    <option value="endDateAsc">전공필수</option>
+								    <option value="endDateDesc">전공선택</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>수강일시</th>
+							<td><input class="input input-bordered w-32 ml-2" type="number" name="year" value="2024"/> 학년도 
+							<select class="select select-ghost w-32 max-w-xs ml-2">
+								    <option value="startDateAsc">1</option>
+								    <option value="startDateDesc">2</option>
+								    <option value="endDateAsc">여름</option>
+								    <option value="endDateDesc">겨울</option>
+								</select> 학기</td>
+						</tr>
+						<tr>
+							<th>학점</th>
+							<td>
+							   <select class="select select-ghost w-32 max-w-xs ml-2">
+								    <option value="startDateAsc">1</option>
+								    <option value="startDateDesc">2</option>
+								    <option value="endDateAsc">3</option>
+							   </select> 학점
+							</td>
+						</tr>
+						<tr>
+							<th>등급</th>
+							<td>
+							   <select class="select select-ghost w-32 max-w-xs ml-2">
+								    <option value="startDateAsc">A+</option>
+								    <option value="startDateDesc">A</option>
+								    <option value="endDateAsc">B+</option>
+								    <option value="endDateAsc">B</option>
+								    <option value="endDateAsc">C+</option>
+								    <option value="endDateAsc">C</option>
+								    <option value="endDateAsc">F</option>
+								    <option value="endDateAsc">P</option>
+							   </select>
+							</td>
+						</tr>
+						<tr>
+							<th>평점</th>
+							<td>
+							   <select class="select select-ghost w-32 max-w-xs ml-2">
+								    <option value="startDateAsc">4.5</option>
+								    <option value="startDateDesc">4</option>
+								    <option value="endDateAsc">3.5</option>
+								    <option value="endDateAsc">3</option>
+								    <option value="endDateAsc">2.5</option>
+								    <option value="endDateAsc">2</option>
+								    <option value="endDateAsc">1.5</option>
+							   </select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+    <c:if test="${rq.loginedMemberId == notice.memberId }">
+	    <div class="flex mt-2 w-full">
+	       <a class="btn-warning p-2 font-semibold rounded-xl w-full mr-2 text-center" href="modify?id=${notice.id }">수정하기</a>
+	       <a class="btn-error p-2 font-semibold rounded-xl w-full text-center" href="delete?id=${notice.id }">삭제하기</a>
+	    </div>
+    </c:if>
+  <div class="flex mt-2 items-center justify-center">
+	       <a class="btn btn-outline mr-2" href="modify?id=${notice.id }">적용</a>
+	       <button class="btn-text-link btn btn-active " type="button" onclick="history.back();">취소</button>
+	    </div>
   </div>
-   
-<script>
-    var editor3 = ace.edit("editor3");
-    var errorContainer = document.getElementById("error-container"); // 오류 메시지를 표시할 요소를 가져옵니다.
-
-    editor3.setTheme("ace/theme/twilight");
-    editor3.setKeyboardHandler("ace/keyboard/sublime");
-    var JavaScriptMode = ace.require("ace/mode/html").Mode;
-    editor3.session.setMode(new JavaScriptMode());
-    ace.require("ace/ext/whitespace");
-    ace.require("ace/ext/command_bar");
-    
-    editor3.setOptions({
-        enableBasicAutocompletion: true,
-        enableLiveAutocompletion: true,
-        enableSnippets: true,
-        autoScrollEditorIntoView: true,
-        copyWithEmptySelection: true,
-        useElasticTabstops: true,
-        spellcheck: true,
-
-        
-
-
-    });  
-       editor3.setShowInvisibles(true); // 화이트스페이스 문자 표시 설정
-       editor3.setValue("<!-- html -->");
-       editor3.session.setUseWrapMode(true);
-       editor3.setHighlightActiveLine(true);
-       editor3.setShowPrintMargin(true);
-       ace.require("ace/ext/error_marker");
-       
-       
-
-    	
-       var editor2 = ace.edit("editor2");
-       var errorContainer = document.getElementById("error-container"); // 오류 메시지를 표시할 요소를 가져옵니다.
-
-       editor2.setTheme("ace/theme/twilight");
-       editor2.setKeyboardHandler("ace/keyboard/sublime");
-       var JavaScriptMode = ace.require("ace/mode/css").Mode;
-       editor2.session.setMode(new JavaScriptMode());
-       ace.require("ace/ext/whitespace");
-       ace.require("ace/ext/command_bar");
-       
-       editor2.setOptions({
-           enableBasicAutocompletion: true,
-           enableLiveAutocompletion: true,
-           enableSnippets: true,
-           autoScrollEditorIntoView: true,
-           copyWithEmptySelection: true,
-           useElasticTabstops: true,
-           spellcheck: true
-           
-
-
-       });  
-          editor2.setShowInvisibles(true); // 화이트스페이스 문자 표시 설정
-          editor2.setValue("/* css */");
-          editor2.session.setUseWrapMode(true);
-          editor2.setHighlightActiveLine(true);
-          editor2.setShowPrintMargin(true);
-          ace.require("ace/ext/error_marker");
-          
-          
-          var editor1 = ace.edit("editor1");
-          var errorContainer = document.getElementById("error-container"); // 오류 메시지를 표시할 요소를 가져옵니다.
-
-          editor1.setTheme("ace/theme/twilight");
-          editor1.setKeyboardHandler("ace/keyboard/sublime");
-          var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
-          editor1.session.setMode(new JavaScriptMode());
-          ace.require("ace/ext/whitespace");
-          ace.require("ace/ext/command_bar");
-          
-          editor1.setOptions({
-              enableBasicAutocompletion: true,
-              enableLiveAutocompletion: true,
-              enableSnippets: true,
-              autoScrollEditorIntoView: true,
-              copyWithEmptySelection: true,
-              useElasticTabstops: true,
-              spellcheck: true
-
-          });  
-             editor1.setShowInvisibles(true); // 화이트스페이스 문자 표시 설정
-             editor1.setValue("// script");
-             editor1.session.setUseWrapMode(true);
-             editor1.setHighlightActiveLine(true);
-             editor1.setShowPrintMargin(true);
-             ace.require("ace/ext/error_marker");
-             
-
-
-
-
-       
-       function alerty(){
-    	   var html = editor3.getValue();
-           var css = editor2.getValue();
-           var javascript = editor1.getValue();
-           
-           let text=html+"<style>"+css+"</style>"+"<scri"+"pt>"+javascript+"</scri"+"pt>";
-    	   var _preview = document.getElementById("preview-vw").contentWindow.document;
-           
-    	    _preview.open();
-    	    _preview.write(text);
-    	    _preview.close();
-           
-       }
-     
-       function back(){
-           editor3.session.getUndoManager().undo();
-           editor2.session.getUndoManager().undo();
-           editor1.session.getUndoManager().undo();
-       }
-       
-       function start(){
-           editor3.session.getUndoManager().redo();
-           editor2.session.getUndoManager().redo();
-           editor1.session.getUndoManager().redo();
-           
-       }
-       function save(){
-    	   
-       }
-       
-       window.addEventListener('resize', function() {
-    	   editor3.resize();
-    	   editor2.resize();
-    	 });
-
-       
-       
-
-
-
-
-
-</script>
-
-    
-    
-	
+  </nav>
 <%@ include file="../common/foot.jsp" %>
-	
-	

@@ -40,23 +40,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.1/ext-error_marker.min.js" integrity="sha512-4J/0fXV7jbSwrb4fio0hSnjUgwbQaznUWkeeV/MyVq5O+kFMPDmDOddUJz/Log6cGJ3sCMheo0gvrathVL6Ylg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.1/ext-spellcheck.min.js" integrity="sha512-Qc3XQ58uY9PsSWhlxpUtv5N519ls71EoNWYlDeq/kr+u+/kgwJUVvwfpl66JlKotZE5hc5sqQXfRp+vJ0K9trQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+<style>
+	.navbar {
+		    background-color: #ABDEE6;
+	}
+</style>
 <body>
-  <div class="navbar bg-base-100">
+  <div class="navbar">
   <div class="navbar-start">
     <div class="dropdown">
-      <label tabindex="0" class="btn btn-ghost btn-circle">
+      <label tabindex="0" class="btn btn-ghost btn-circle text-white">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
       </label>
 	      <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
 	        <li><a href="/user/member/doLogout">로그아웃</a></li>
-	        <li><a href="/user/group/create">학점 관리</a></li>
-	        <li><a href="/user/member/schedule">과목 추가</a></li>
-	        <li><a href="/user/member/codeEditor">프로필 관리</a></li>
+	        <li><a href="/user/member/schedule">학점 관리</a></li>
+	        <li><a href="/user/member/codeEditor">과목 추가</a></li>
+	        <li><a href="/user/group/create">프로필 정보 관리</a></li>
 	      </ul>
     </div>
   </div>
   <div class="navbar-center">
-	    <a class="btn btn-ghost text-2xl" href="/">INTRODUCE</a>
+	    <a class="btn btn-ghost text-2xl text-white" href="/">INTRODUCE</a>
   </div>
   <div class="navbar-end">
   </div>
