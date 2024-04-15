@@ -54,9 +54,10 @@
       </label>
 	      <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
 	        <li><a href="/user/member/doLogout">로그아웃</a></li>
-	        <li><a href="/user/member/schedule">학점 관리</a></li>
-	        <li><a href="/user/member/codeEditor">과목 추가</a></li>
-	        <li><a href="/user/group/create">프로필 정보 관리</a></li>
+	        <li><a href="/user/score/read">학점 관리</a></li>
+	        <li><a href="/user/score/add">과목 추가</a></li>
+	        <li><a href="/user/profile/create">프로필 생성</a></li>
+	        <li><a href="/user/profile/modify?id=1">프로필 수정</a></li>
 	      </ul>
     </div>
   </div>

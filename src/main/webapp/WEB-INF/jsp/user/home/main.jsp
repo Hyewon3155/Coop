@@ -24,9 +24,9 @@
          <h1 class="text-black text-center text-xl mt-4">
             이메일 : kho3155@naver.com
         </h1>
-    <a href="../group/create">
-    <button class="btn btn-wide btn-outline mt-4"><i class="bi bi-plus-circle mr-2"></i>더보기</button>
-</a>
+    <a href="../profile/modify?id=1">
+    <button class="btn btn-wide btn-outline mt-4"><i class="bi bi-plus-circle mr-2"></i>수정하기</button>
+   </a>
  </div>
 </div>
 

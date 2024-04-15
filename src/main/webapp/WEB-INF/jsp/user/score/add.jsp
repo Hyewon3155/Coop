@@ -81,12 +81,6 @@
 					</tbody>
 				</table>
 				</div>
-    <c:if test="${rq.loginedMemberId == notice.memberId }">
-	    <div class="flex mt-2 w-full">
-	       <a class="btn-warning p-2 font-semibold rounded-xl w-full mr-2 text-center" href="modify?id=${notice.id }">수정하기</a>
-	       <a class="btn-error p-2 font-semibold rounded-xl w-full text-center" href="delete?id=${notice.id }">삭제하기</a>
-	    </div>
-    </c:if>
   <div class="flex mt-2 items-center justify-center">
 	       <a class="btn btn-outline mr-2" href="modify?id=${notice.id }">적용</a>
 	       <button class="btn-text-link btn btn-active " type="button" onclick="history.back();">취소</button>
