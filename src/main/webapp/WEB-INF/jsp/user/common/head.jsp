@@ -56,6 +56,7 @@
 	        <li><a href="/user/member/doLogout">로그아웃</a></li>
 	        <li><a href="/user/score/read">학점 관리</a></li>
 	        <li><a href="/user/score/add">과목 추가</a></li>
+	        <li><a href="/user/score/modify">학점 정보 수정</a></li>
 	        <li><a href="/user/profile/create">프로필 생성</a></li>
 	        <li><a href="/user/profile/modify?id=1">프로필 수정</a></li>
 	      </ul>

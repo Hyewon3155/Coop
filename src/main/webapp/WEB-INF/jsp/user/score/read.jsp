@@ -13,23 +13,22 @@ html, body {
    
 }
 .work-grid-container {
-  height:100%;
-  width:100%;
+  height: 100%;
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr; 
-  grid-template-rows: 1fr 1fr; 
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr; /* 2개의 행 */
   gap: 10px;
 }
 
 .item1 {
-  grid-column: 1; /* 1열 전체 차지 */
-  grid-row: 1 / span 2; /* 1행부터 시작하여 2행까지 차지 */
+  grid-row: 1; /* 1행 전체 차지 */
 }
 
 .item2 {
-  grid-column: 2; /* 2열 전체 차지 */
-  grid-row: 1 / span 2; /* 1행부터 시작하여 2행까지 차지 */
+  grid-row: 2; /* 2행 전체 차지 */
 }
+
 
     table, th, td {
         border: none;
@@ -54,7 +53,6 @@ html, body {
 						<col width="20"/>
 						<col width="20"/>
 						<col width="20"/>
-						<col width="20"/>
 					</colgroup>
     <!-- head -->
     <thead>
@@ -65,36 +63,46 @@ html, body {
       <th class="bg-blue-300 text-lg text-white">이수학년</th>
         <th class="bg-blue-300 text-lg text-white">신청학점</th>
         <th class="bg-blue-300 text-lg text-white">취득학점</th>
-        <th class="bg-blue-300 text-lg text-white">평점계</th>
-        <th class="bg-blue-300 text-lg text-white">백분위점수</th>
+        <th class="bg-blue-300 text-lg text-white">평균평점</th>
       </tr>
     </thead>
-    <tbody  id="tableBodyId">
-            <c:forEach items="${toDos}" var="toDo" varStatus="status" >          
-    <input type="hidden" value="${toDo.title }" id="toDoId"/>
-      <!-- row 1 -->
+    <tbody  id="tableBodyId">      <!-- row 1 -->
       <tr>
-        <td class="bg-gray-100 font-normal">${status.index + 1}</td>
-        <td class="bg-gray-100 font-normal">${toDo.startDate.substring(0, 10) }</td>
-        <td class="bg-gray-100 font-normal">${toDo.endDate.substring(0, 10) }</td>
-        <td class="bg-gray-100 font-normal">${toDo.projectName }</td>
-        <td class="bg-gray-100">${toDo.title }</td>
-        <c:choose>
-    		<c:when test="${toDo.status == 1}">
-    			<td class="bg-yellow-200">
-    			   <button class="statusChangeBtn" data-id="${toDo.id}" data-new-status="2">생성 완료</button>
-    			</td>
-    		</c:when>
-    		<c:when test="${toDo.status == 2}">
-    		    <td class="bg-red-200">
-    		      <button class="statusChangeBtn" data-id="${toDo.id}" data-new-status="3">작업중</button>
-    		    </td>
-    		</c:when>
-		    <c:otherwise>
-		    </c:otherwise>
-		</c:choose>
-		      </tr>
-		    </c:forEach>
+        <td class="bg-gray-100 font-normal">1</td>
+        <td class="bg-gray-100 font-normal">1</td>
+        <td class="bg-gray-100 font-normal">2021</td>
+        <td class="bg-gray-100 font-normal">1학기</td>
+        <td class="bg-gray-100 font-normal">18</td>
+        <td class="bg-gray-100 font-normal">18</td>
+        <td class="bg-gray-100 font-normal">4.14</td>
+     </tr>
+      <tr>
+        <td class="bg-gray-100 font-normal">2</td>
+        <td class="bg-gray-100 font-normal">1</td>
+        <td class="bg-gray-100 font-normal">2021</td>
+        <td class="bg-gray-100 font-normal">2학기</td>
+        <td class="bg-gray-100 font-normal">19</td>
+        <td class="bg-gray-100 font-normal">19</td>
+        <td class="bg-gray-100 font-normal">4.23</td>
+     </tr>
+      <tr>
+        <td class="bg-gray-100 font-normal">3</td>
+        <td class="bg-gray-100 font-normal">2</td>
+        <td class="bg-gray-100 font-normal">2022</td>
+        <td class="bg-gray-100 font-normal">1학기</td>
+        <td class="bg-gray-100 font-normal">19</td>
+        <td class="bg-gray-100 font-normal">19</td>
+        <td class="bg-gray-100 font-normal">3.3</td>
+     </tr>
+      <tr>
+        <td class="bg-gray-100 font-normal">4</td>
+        <td class="bg-gray-100 font-normal">2</td>
+        <td class="bg-gray-100 font-normal">2022</td>
+        <td class="bg-gray-100 font-normal">2학기</td>
+        <td class="bg-gray-100 font-normal">19</td>
+        <td class="bg-gray-100 font-normal">19</td>
+        <td class="bg-gray-100 font-normal">3.41</td>
+     </tr>
     </tbody>
   </table>
 </div>
@@ -115,33 +123,82 @@ html, body {
 						<col width="20"/>
 						<col width="20"/>
 						<col width="20"/>
+						<col width="20"/>
+						<col width="20"/>
+						<col width="20"/>
 					</colgroup>
     <thead>
       <tr>
       <th class="bg-blue-300 text-lg text-white">순번</th>
       <th class="bg-blue-300 text-lg text-white">학년도</th>
+      <th class="bg-blue-300 text-lg text-white">학기</th>
       <th class="bg-blue-300 text-lg text-white">이수구분</th>
       <th class="bg-blue-300 text-lg text-white">교과목명</th>
       <th class="bg-blue-300 text-lg text-white">학점</th>
         <th class="bg-blue-300 text-lg text-white">등급</th>
         <th class="bg-blue-300 text-lg text-white">평점</th>
+        <th class="bg-blue-300 text-lg text-white">수정</th>
+        <th class="bg-blue-300 text-lg text-white">삭제</th>
+        
+        
       </tr>
     </thead>
-   <c:forEach items="${Dones}" var="Done" varStatus="status">
-    <tbody>
-      <!-- row 1 -->
+    <tbody  id="tableBodyId">      <!-- row 1 -->
       <tr>
-        <th>${status.index + 1 }</th>
-        <th>${Done.projectName }</th>
-        <td>${Done.title }</td>
-        <td class="bg-green-200">작업 완료</td>
-      </tr>
+        <td class="bg-gray-100 font-normal">1</td>
+        <td class="bg-gray-100 font-normal">2021</td>
+        <td class="bg-gray-100 font-normal">1학기</td>
+        <td class="bg-gray-100 font-normal">교양필수</td>
+        <td class="bg-gray-100 font-normal">사회봉사 I</td>
+        <td class="bg-gray-100 font-normal">1</td>
+        <td class="bg-gray-100 font-normal">P</td>
+        <td class="bg-gray-100 font-normal">0</td>
+        <td class="bg-yellow-300 font-bold">수정</td>
+        <td class="bg-red-300 font-bold">삭제</td>
+        
+     </tr>
+     <tr>
+        <td class="bg-gray-100 font-normal">1</td>
+        <td class="bg-gray-100 font-normal">2021</td>
+        <td class="bg-gray-100 font-normal">1학기</td>
+        <td class="bg-gray-100 font-normal">교양필수</td>
+        <td class="bg-gray-100 font-normal">사고와표현 1 - 글쓰기</td>
+        <td class="bg-gray-100 font-normal">2</td>
+        <td class="bg-gray-100 font-normal">A+</td>
+        <td class="bg-gray-100 font-normal">4.5</td>
+        <td class="bg-yellow-300 font-bold">수정</td>
+        <td class="bg-red-300 font-bold">삭제</td>
+     </tr>
+     <tr>
+        <td class="bg-gray-100 font-normal">1</td>
+        <td class="bg-gray-100 font-normal">2021</td>
+        <td class="bg-gray-100 font-normal">1학기</td>
+        <td class="bg-gray-100 font-normal">교양필수</td>
+        <td class="bg-gray-100 font-normal">드림프로젝트</td>
+        <td class="bg-gray-100 font-normal">2</td>
+        <td class="bg-gray-100 font-normal">A+</td>
+        <td class="bg-gray-100 font-normal">4.5</td>
+        <td class="bg-yellow-300 font-bold">수정</td>
+        <td class="bg-red-300 font-bold">삭제</td>
+     </tr>
+     <tr>
+        <td class="bg-gray-100 font-normal">1</td>
+        <td class="bg-gray-100 font-normal">2021</td>
+        <td class="bg-gray-100 font-normal">1학기</td>
+        <td class="bg-gray-100 font-normal">교양선택</td>
+        <td class="bg-gray-100 font-normal">음악과인성</td>
+        <td class="bg-gray-100 font-normal">2</td>
+        <td class="bg-gray-100 font-normal">A+</td>
+        <td class="bg-gray-100 font-normal">4.5</td>
+        <td class="bg-yellow-300 font-bold">수정</td>
+        <td class="bg-red-300 font-bold">삭제</td>
+     </tr>
     </tbody>
-    </c:forEach>
   </table>
 </div>
       </div>
     </div>
+
   </div>
 
 </div>

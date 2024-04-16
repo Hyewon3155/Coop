@@ -25,9 +25,9 @@ public class ProfileService {
 		this.profileRepository = profileRepository;
 	}
 	
-	public ResultData<Integer> doJoin(String name, String school, String depart, String cellphoneNum, String email, String filePath) {
+	public ResultData<Integer> doJoin(String name, String school, String depart, String cellphoneNum, String email) {
 		
-		profileRepository.doJoin(name, school, depart, cellphoneNum, email, filePath);
+		profileRepository.doJoin(name, school, depart, cellphoneNum, email);
 		
 		return ResultData.from("S-1", Util.f("%s님의 프로필이 생성되었습니다", name), "name", profileRepository.getLastInsertId());
 	}
@@ -37,8 +37,8 @@ public class ProfileService {
 	}
 	
 	public void doModify(String name, String school, String depart, String cellphoneNum,
-			String email, String filePath) {
-		profileRepository.doModify(name, school, depart, cellphoneNum, email, filePath);
+			String email) {
+		profileRepository.doModify(name, school, depart, cellphoneNum, email);
 		
 	}
 	/*

@@ -16,10 +16,9 @@ public interface ProfileRepository {
 				    school = #{school},
 				    depart = #{depart},
 				    cellphoneNum = #{cellphoneNum},
-					email = #{email},
-					filePath = #{filePath}
+					email = #{email}
 			""")
-	public void doJoin(String name, String school, String depart, String cellphoneNum, String email, String filePath);
+	public void doJoin(String name, String school, String depart, String cellphoneNum, String email);
 	
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
@@ -37,11 +36,10 @@ public interface ProfileRepository {
 			        school = #{school},
 			        depart = #{depart},
 			        cellphoneNum = #{cellphoneNum},
-			        email = #{email},
-			        filePath = #{filePath}
+			        email = #{email}
 			   WHERE id = 1
 			""")
-	public void doModify(String name, String school, String depart, String cellphoneNum, String email, String filePath);
+	public void doModify(String name, String school, String depart, String cellphoneNum, String email);
 
 
 	@Select("""
