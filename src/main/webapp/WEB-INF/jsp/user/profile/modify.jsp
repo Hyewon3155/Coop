@@ -6,7 +6,7 @@
       
       function validateEmail(email) {
     	    // 이메일 형식을 검사하는 정규 표현식
-    	    var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+   	    var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     	    return re.test(email);
     	}
       

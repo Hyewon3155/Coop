@@ -1,5 +1,7 @@
 package com.hyewon.introduce.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +21,9 @@ public class ScoreService {
 	}
 
 
-	public ResultData<Integer> doJoin(String name, String subject, String semester, int credit, String rank,
+	public ResultData<Integer> doJoin(String name, String subject, int year, String semester, int credit, String rank,
 			double grade) {
-		scoreRepository.doJoin(name, subject, semester, credit, rank, grade);
+		scoreRepository.doJoin(name, subject, year, semester, credit, rank, grade);
 		return ResultData.from("S-1", Util.f("%s 과목이 추가되었습니다", name), "name", scoreRepository.getLastInsertId());
 	}
 
@@ -29,5 +31,18 @@ public class ScoreService {
 	public Score getScoreById(int id) {
 		return scoreRepository.getScoreById(id);
 	}
+
+
+	public void doModify(int id, String name, String subject, String semester, int credit, String rank, double grade) {
+		scoreRepository.doModify(id, name, subject, semester, credit, rank, grade);
+		
+	}
+
+
+	public List<Score> getTotalScores() {
+		return scoreRepository.getTotalScores();
+	}
+
+
 	
 }

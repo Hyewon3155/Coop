@@ -1,5 +1,7 @@
 package com.hyewon.introduce.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +32,7 @@ public class UsrScoreController {
 	
 	@RequestMapping("/user/score/doJoin")
 	@ResponseBody
-	public String doJoin(String name, String subject, String semester, int credit, String rank, double grade) {
+	public String doJoin(String name, String subject, int year, String semester, int credit, String rank, double grade) {
 	    // 이름, 학교, 학과, 전화번호, 이메일이 비어 있는지 확인
 	    if (Util.empty(name)) {
 	        return Util.jsHistoryBack("과목명을 입력해주세요");
@@ -47,7 +49,7 @@ public class UsrScoreController {
 	    
 
     // 프로필 정보 저장
-    ResultData<Integer> doJoinRd = scoreService.doJoin(name, subject, semester, credit, rank, grade);
+    ResultData<Integer> doJoinRd = scoreService.doJoin(name, subject, year, semester, credit, rank, grade);
 
     if (doJoinRd.isFail()) {
         return Util.jsHistoryBack(doJoinRd.getMsg());
@@ -56,20 +58,43 @@ public class UsrScoreController {
     return Util.jsReplace(doJoinRd.getMsg(), "/");
 	}	
 	
-	
 	@RequestMapping("/user/score/read")
-	public String showRead() {
+	public String showRead(Model model) {
+		List<Score> totalScores = scoreService.getTotalScores();
+   
+		
 		return "user/score/read";
 	}
 	
 	
 	@RequestMapping("/user/score/modify")
 	public String modify(Model model, int id) {
-
-		Score score = scoreService.getScoreById(id);
-		model.addAttribute("score", score);
-
 		return "user/score/modify";
 	}
+	
+	@RequestMapping("/user/score/doModify")
+	@ResponseBody
+	public String doModify(int id, String name, String subject, String semester, int credit, String rank, double grade) {
+	    // 이름, 학교, 학과, 전화번호, 이메일이 비어 있는지 확인
+	    if (Util.empty(name)) {
+	        return Util.jsHistoryBack("과목명을 입력해주세요");
+	    }
+	    if (Util.empty(subject)) {
+	        return Util.jsHistoryBack("이수구분을 선택해주세요");
+	    }
+	    if (Util.empty(semester)) {
+	        return Util.jsHistoryBack("학기를 선택해주세요");
+	    }
+	    if (Util.empty(rank)) {
+	        return Util.jsHistoryBack("등급을 입력해주세요");
+	    }
+	    
+	    scoreService.doModify(id, name, subject, semester, credit, rank, grade);
+
+		
+        return Util.jsReplace("성적 정보가 수정되었습니다", "/");
+
+
+	}	
 	
 }

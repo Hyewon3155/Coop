@@ -15,4 +15,6 @@ public class Score {
 	private int credit;
 	private String rank;
 	private double grade;
+	private int total_credit;
+	private double avg_credit;
 }

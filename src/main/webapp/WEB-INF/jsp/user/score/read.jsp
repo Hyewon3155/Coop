@@ -52,7 +52,6 @@ html, body {
 						<col width="20"/>
 						<col width="20"/>
 						<col width="20"/>
-						<col width="20"/>
 					</colgroup>
     <!-- head -->
     <thead>
@@ -61,49 +60,24 @@ html, body {
        <th class="bg-blue-300 text-lg text-white">학년도</th>
        <th class="bg-blue-300 text-lg text-white">학기</th>
       <th class="bg-blue-300 text-lg text-white">이수학년</th>
-        <th class="bg-blue-300 text-lg text-white">신청학점</th>
         <th class="bg-blue-300 text-lg text-white">취득학점</th>
         <th class="bg-blue-300 text-lg text-white">평균평점</th>
       </tr>
     </thead>
-    <tbody  id="tableBodyId">      <!-- row 1 -->
+        <tbody  id="tableBodyId">
+            <c:forEach items="${totalScroes}" var="totalScore" varStatus="status" >          
+      <!-- row 1 -->
       <tr>
-        <td class="bg-gray-100 font-normal">1</td>
-        <td class="bg-gray-100 font-normal">1</td>
-        <td class="bg-gray-100 font-normal">2021</td>
-        <td class="bg-gray-100 font-normal">1학기</td>
-        <td class="bg-gray-100 font-normal">18</td>
-        <td class="bg-gray-100 font-normal">18</td>
-        <td class="bg-gray-100 font-normal">4.14</td>
-     </tr>
-      <tr>
-        <td class="bg-gray-100 font-normal">2</td>
-        <td class="bg-gray-100 font-normal">1</td>
-        <td class="bg-gray-100 font-normal">2021</td>
-        <td class="bg-gray-100 font-normal">2학기</td>
-        <td class="bg-gray-100 font-normal">19</td>
-        <td class="bg-gray-100 font-normal">19</td>
-        <td class="bg-gray-100 font-normal">4.23</td>
-     </tr>
-      <tr>
-        <td class="bg-gray-100 font-normal">3</td>
-        <td class="bg-gray-100 font-normal">2</td>
-        <td class="bg-gray-100 font-normal">2022</td>
-        <td class="bg-gray-100 font-normal">1학기</td>
-        <td class="bg-gray-100 font-normal">19</td>
-        <td class="bg-gray-100 font-normal">19</td>
-        <td class="bg-gray-100 font-normal">3.3</td>
-     </tr>
-      <tr>
-        <td class="bg-gray-100 font-normal">4</td>
-        <td class="bg-gray-100 font-normal">2</td>
-        <td class="bg-gray-100 font-normal">2022</td>
-        <td class="bg-gray-100 font-normal">2학기</td>
-        <td class="bg-gray-100 font-normal">19</td>
-        <td class="bg-gray-100 font-normal">19</td>
-        <td class="bg-gray-100 font-normal">3.41</td>
-     </tr>
+        <td class="bg-gray-100 font-normal">${status.index + 1}</td>
+        <td class="bg-gray-100 font-normal">${totalScore.year }</td>
+        <td class="bg-gray-100 font-normal">${totalScore.semester }</td>
+        <td class="bg-gray-100 font-normal">${totalScore.year } - 2020</td>
+        <td class="bg-gray-100 font-normal">${totalScore.total_credit }</td>
+        <td class="bg-gray-100 font-normal">${sum}</td>
+	  </tr>
+		    </c:forEach>
     </tbody>
+
   </table>
 </div>
       </div>
@@ -153,45 +127,8 @@ html, body {
         <td class="bg-gray-100 font-normal">1</td>
         <td class="bg-gray-100 font-normal">P</td>
         <td class="bg-gray-100 font-normal">0</td>
-        <td class="bg-yellow-300 font-bold">수정</td>
-        <td class="bg-red-300 font-bold">삭제</td>
-        
-     </tr>
-     <tr>
-        <td class="bg-gray-100 font-normal">1</td>
-        <td class="bg-gray-100 font-normal">2021</td>
-        <td class="bg-gray-100 font-normal">1학기</td>
-        <td class="bg-gray-100 font-normal">교양필수</td>
-        <td class="bg-gray-100 font-normal">사고와표현 1 - 글쓰기</td>
-        <td class="bg-gray-100 font-normal">2</td>
-        <td class="bg-gray-100 font-normal">A+</td>
-        <td class="bg-gray-100 font-normal">4.5</td>
-        <td class="bg-yellow-300 font-bold">수정</td>
-        <td class="bg-red-300 font-bold">삭제</td>
-     </tr>
-     <tr>
-        <td class="bg-gray-100 font-normal">1</td>
-        <td class="bg-gray-100 font-normal">2021</td>
-        <td class="bg-gray-100 font-normal">1학기</td>
-        <td class="bg-gray-100 font-normal">교양필수</td>
-        <td class="bg-gray-100 font-normal">드림프로젝트</td>
-        <td class="bg-gray-100 font-normal">2</td>
-        <td class="bg-gray-100 font-normal">A+</td>
-        <td class="bg-gray-100 font-normal">4.5</td>
-        <td class="bg-yellow-300 font-bold">수정</td>
-        <td class="bg-red-300 font-bold">삭제</td>
-     </tr>
-     <tr>
-        <td class="bg-gray-100 font-normal">1</td>
-        <td class="bg-gray-100 font-normal">2021</td>
-        <td class="bg-gray-100 font-normal">1학기</td>
-        <td class="bg-gray-100 font-normal">교양선택</td>
-        <td class="bg-gray-100 font-normal">음악과인성</td>
-        <td class="bg-gray-100 font-normal">2</td>
-        <td class="bg-gray-100 font-normal">A+</td>
-        <td class="bg-gray-100 font-normal">4.5</td>
-        <td class="bg-yellow-300 font-bold">수정</td>
-        <td class="bg-red-300 font-bold">삭제</td>
+        <td  class="bg-yellow-300 font-bold"><button>수정</button></td>
+        <td  class="bg-red-300 font-bold"><button>삭제</button></td>
      </tr>
     </tbody>
   </table>

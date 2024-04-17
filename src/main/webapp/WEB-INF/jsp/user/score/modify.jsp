@@ -62,6 +62,7 @@
      </div>
     <div class="w-3/4 mx-auto bg-white p-3 rounded-lg shadow-md mt-10">
            <form action="doModify" method="POST" onsubmit="join_submitForm(this); return false;">
+           		<input type="hidden" name="id"/>
     <div class="table-box-type-1">
 				<table class="table w-full">
 					<colgroup>
@@ -76,7 +77,7 @@
 							<th>이수구분</th>
 							<td>
 								<select class="select select-ghost w-full max-w-xs ml-2" id="subject">
-								     <option disabled selected value="">이수구분</option>
+								     <option disabled selected value="${score.subject }">${score.subject }</option>
 								    <option value="교양필수">교양필수</option>
 								    <option value="교양선택">교양선택</option>
 								    <option value="전공필수">전공필수</option>
@@ -88,7 +89,7 @@
 							<th>수강일시</th>
 							<td><input class="input input-bordered w-32 ml-2" type="number" name="year" value="2024"/> 학년도 
 							<select class="select select-ghost w-32 max-w-xs ml-2" id="semester">
-									<option disabled selected value="">학기 선택</option>
+									<option disabled selected value="${score.semester }">${score.semester }</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
 								    <option value="여름">여름</option>
@@ -99,7 +100,7 @@
 							<th>학점</th>
 							<td>
 							   <select class="select select-ghost w-32 max-w-xs ml-2" id="credit">
-							   		<option disabled selected value="">학점 선택</option>
+							   		<option disabled selected value="${score.credit }">${score.credit }</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
 								    <option value="3">3</option>
@@ -110,7 +111,7 @@
 							<th>등급</th>
 							<td>
 							   <select class="select select-ghost w-32 max-w-xs ml-2" id="rank">
-							   		<option disabled selected value="">등급 선택</option>
+							   		<option disabled selected value="${score.rank }">${score.rank }</option>
 								    <option value="A+">A+</option>
 								    <option value="A">A</option>
 								    <option value="B+">B+</option>
@@ -126,7 +127,7 @@
 							<th>평점</th>
 							<td>
 							   <select class="select select-ghost w-32 max-w-xs ml-2" id="grade">
-							   		<option disabled selected value="">평점 선택</option>
+							   		<option disabled selected value="${score.grade }">${score.grade }</option>
 								    <option value="4.5">4.5</option>
 								    <option value="4">4</option>
 								    <option value="3.5">3.5</option>
