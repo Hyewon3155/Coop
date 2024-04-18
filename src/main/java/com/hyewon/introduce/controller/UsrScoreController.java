@@ -61,8 +61,8 @@ public class UsrScoreController {
 	@RequestMapping("/user/score/read")
 	public String showRead(Model model) {
 		List<Score> totalScores = scoreService.getTotalScores();
-   
 		
+		model.addAttribute("totalScores", totalScores);
 		return "user/score/read";
 	}
 	

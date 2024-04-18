@@ -53,12 +53,9 @@ public interface ScoreRepository {
 
 	public void doModify(int id, String name, String subject, String semester, int credit, String rank, double grade);
 
-	@Select("""
-            SELECT s.year, s.semester, 
-            (SELECT SUM(credit) FROM score WHERE year = s.year AND semester = s.semester) AS total_credit 
-            FROM score s;
-            """)
+
 	public List<Score> getTotalScores();
+
 	
 
 

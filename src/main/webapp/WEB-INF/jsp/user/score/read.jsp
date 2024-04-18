@@ -65,15 +65,15 @@ html, body {
       </tr>
     </thead>
         <tbody  id="tableBodyId">
-            <c:forEach items="${totalScroes}" var="totalScore" varStatus="status" >          
+            <c:forEach items="${totalScores}" var="totalScore" varStatus="status">          
       <!-- row 1 -->
       <tr>
-        <td class="bg-gray-100 font-normal">${status.index + 1}</td>
+        <td class="bg-gray-100 font-normal">${status.index + 1 }</td>
         <td class="bg-gray-100 font-normal">${totalScore.year }</td>
         <td class="bg-gray-100 font-normal">${totalScore.semester }</td>
-        <td class="bg-gray-100 font-normal">${totalScore.year } - 2020</td>
+        <td class="bg-gray-100 font-normal">${totalScore.year - 2020 } </td>
         <td class="bg-gray-100 font-normal">${totalScore.total_credit }</td>
-        <td class="bg-gray-100 font-normal">${sum}</td>
+        <td class="bg-gray-100 font-normal">${totalScore.average_grade}</td>
 	  </tr>
 		    </c:forEach>
     </tbody>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hyewon.introduce.repository.ScoreRepository">
+
+<select id="getTotalScores" resultType="Score">
+        <![CDATA[
+        WITH SemesterStats AS (
+		    SELECT `year`, semester, 
+		           SUM(credit) AS total_credit,
+		           SUM(credit * grade) / SUM(credit) AS average_grade
+		    FROM score
+		    GROUP BY `year`, semester
+		)
+		SELECT DISTINCT s.year, s.semester,
+		       ss.total_credit,
+		       ss.average_grade
+		FROM score s
+		JOIN SemesterStats ss ON s.year = ss.year AND s.semester = ss.semester;
+
+        ]]>
+</select>
+</mapper>

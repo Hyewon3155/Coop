@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Score {
 	private int id;
+	private int year;
 	private String name;
 	private String subject;
 	private String semester;
@@ -16,5 +17,5 @@ public class Score {
 	private String rank;
 	private double grade;
 	private int total_credit;
-	private double avg_credit;
+	private double average_grade;
 }
