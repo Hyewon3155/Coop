@@ -33,14 +33,19 @@ public class ScoreService {
 	}
 
 
-	public void doModify(int id, String name, String subject, String semester, int credit, String rank, double grade) {
-		scoreRepository.doModify(id, name, subject, semester, credit, rank, grade);
+	public void doModify(int id, String name, String subject, String year, String semester, int credit, String rank, double grade) {
+		scoreRepository.doModify(id, name, subject, year, semester, credit, rank, grade);
 		
 	}
 
 
 	public List<Score> getTotalScores() {
 		return scoreRepository.getTotalScores();
+	}
+
+
+	public List<Score> getYearAndSemester(int year, int semester) {
+		return scoreRepository.getYearAndSemester(year, semester);
 	}
 
 

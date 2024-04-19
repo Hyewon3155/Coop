@@ -3,6 +3,34 @@
 <c:set var="pageTitle" value="성적 조회" />
 <%@ include file="../common/head.jsp" %>
 <script>
+function getYearAndSemester(event) {
+	const row = event.currentTarget;
+	  const year = parseInt(row.getElementsByTagName('td')[1].textContent);
+	  const semester = parseInt(row.getElementsByTagName('td')[2].textContent);
+
+	  $.get('getYearAndSemester', {
+		  year: year,
+		  semester: semester,
+	    }, function(data) {
+		 
+		    if (data.success) {
+		        var tableContent = "";
+
+		        data.data1.forEach(function(score, index) {
+
+		            tableContent += '<tr><td class="bg-gray-100 font-normal">' + (index + 1) + '</td><td class="bg-gray-100 font-normal">' + score.year + '</td><td class="bg-gray-100 font-normal">' + score.semester + '</td><td class="bg-gray-100 font-normal">' + score.subject + '</td><td class="bg-gray-100">' + score.name + '</td><td class="bg-gray-100">' + score.credit + '</td><td class="bg-gray-100">'+ score.rank + '</td><td class="bg-gray-100">' + score.grade + '<td  class="bg-yellow-300 font-bold"><a href="modify?id=' + score.id + '">수정</a></td>' + '<td  class="bg-red-300 font-bold"><a href="delete?id=' + score.id + '">삭제</a></td>' + '</tr>';
+		        });
+
+		        $("#scoreTableId").html(tableContent);
+		    } else {
+		        alert(data.msg);
+		    }
+		}, 'json');
+
+}
+
+
+
 </script>
 <style>
 html, body {
@@ -35,6 +63,10 @@ html, body {
         border-collapse: collapse;
         text-align: center;
     }
+    tr {
+    cursor: pointer;
+}
+    
   
 
 </style>
@@ -65,15 +97,16 @@ html, body {
       </tr>
     </thead>
         <tbody  id="tableBodyId">
-            <c:forEach items="${totalScores}" var="totalScore" varStatus="status">          
+            <c:forEach items="${totalScores}" var="totalScore" varStatus="status">   
       <!-- row 1 -->
-      <tr>
+      <tr onclick="getYearAndSemester(event)">      
         <td class="bg-gray-100 font-normal">${status.index + 1 }</td>
         <td class="bg-gray-100 font-normal">${totalScore.year }</td>
         <td class="bg-gray-100 font-normal">${totalScore.semester }</td>
         <td class="bg-gray-100 font-normal">${totalScore.year - 2020 } </td>
         <td class="bg-gray-100 font-normal">${totalScore.total_credit }</td>
         <td class="bg-gray-100 font-normal">${totalScore.average_grade}</td>
+        
 	  </tr>
 		    </c:forEach>
     </tbody>
@@ -117,19 +150,7 @@ html, body {
         
       </tr>
     </thead>
-    <tbody  id="tableBodyId">      <!-- row 1 -->
-      <tr>
-        <td class="bg-gray-100 font-normal">1</td>
-        <td class="bg-gray-100 font-normal">2021</td>
-        <td class="bg-gray-100 font-normal">1학기</td>
-        <td class="bg-gray-100 font-normal">교양필수</td>
-        <td class="bg-gray-100 font-normal">사회봉사 I</td>
-        <td class="bg-gray-100 font-normal">1</td>
-        <td class="bg-gray-100 font-normal">P</td>
-        <td class="bg-gray-100 font-normal">0</td>
-        <td  class="bg-yellow-300 font-bold"><button>수정</button></td>
-        <td  class="bg-red-300 font-bold"><button>삭제</button></td>
-     </tr>
+    <tbody id="scoreTableId">      <!-- row 1 -->
     </tbody>
   </table>
 </div>

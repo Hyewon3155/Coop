@@ -66,15 +66,29 @@ public class UsrScoreController {
 		return "user/score/read";
 	}
 	
+	@RequestMapping("/user/score/getYearAndSemester")
+	@ResponseBody
+	public ResultData getYearAndSemester(int year, int semester, Model model) {
+		List<Score> scores= scoreService.getYearAndSemester(year, semester);
+		if (scores.isEmpty()) {
+			return ResultData.from("F-2", "불러오는 것에 실패하였습니다.");
+		}
+		model.addAttribute("scores", scores);
+		return ResultData.from("S-1", "", "scores", scores);
+
+	}
+	
 	
 	@RequestMapping("/user/score/modify")
 	public String modify(Model model, int id) {
+		Score score = scoreService.getScoreById(id);
+		model.addAttribute("score", score);
 		return "user/score/modify";
 	}
 	
 	@RequestMapping("/user/score/doModify")
 	@ResponseBody
-	public String doModify(int id, String name, String subject, String semester, int credit, String rank, double grade) {
+	public String doModify(int id, String name, String subject, String year, String semester, int credit, String rank, double grade) {
 	    // 이름, 학교, 학과, 전화번호, 이메일이 비어 있는지 확인
 	    if (Util.empty(name)) {
 	        return Util.jsHistoryBack("과목명을 입력해주세요");
@@ -82,14 +96,11 @@ public class UsrScoreController {
 	    if (Util.empty(subject)) {
 	        return Util.jsHistoryBack("이수구분을 선택해주세요");
 	    }
-	    if (Util.empty(semester)) {
-	        return Util.jsHistoryBack("학기를 선택해주세요");
-	    }
 	    if (Util.empty(rank)) {
 	        return Util.jsHistoryBack("등급을 입력해주세요");
 	    }
 	    
-	    scoreService.doModify(id, name, subject, semester, credit, rank, grade);
+	    scoreService.doModify(id, name, subject, year, semester, credit, rank, grade);
 
 		
         return Util.jsReplace("성적 정보가 수정되었습니다", "/");

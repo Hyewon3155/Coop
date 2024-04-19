@@ -15,7 +15,7 @@
 	}
 	function handleSubmit2() {
 	    var selectElement = document.getElementById('grade');
-	    var selectedValue = parseInt(selectElement.value, 10); // 문자열을 정수로 변환
+	    var selectedValue = parseDouble(selectElement.value); // 문자열을 정수로 변환
 	
 	    // 여기서 selectedValue를 사용하여 원하는 처리를 할 수 있습니다.
 	    console.log("선택된 평점: ", selectedValue);

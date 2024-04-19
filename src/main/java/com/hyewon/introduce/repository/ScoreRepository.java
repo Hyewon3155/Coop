@@ -42,6 +42,7 @@ public interface ScoreRepository {
 			UPDATE score
 				SET `name` = #{name},
 				    `subject` = #{subject},
+				    `year` = #{year},
 				    semester = #{semester},
 				    credit = #{credit},
 					`rank` = #{rank},
@@ -51,10 +52,20 @@ public interface ScoreRepository {
 			""")
 
 
-	public void doModify(int id, String name, String subject, String semester, int credit, String rank, double grade);
+	public void doModify(int id, String name, String subject, String year, String semester, int credit, String rank, double grade);
 
 
 	public List<Score> getTotalScores();
+
+	@Select("""
+			SELECT * 
+				FROM score
+			    WHERE `year` = #{year}
+			    AND semester = #{semester}
+
+			"""
+			)
+	public List<Score> getYearAndSemester(int year, int semester);
 
 	
 

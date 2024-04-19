@@ -3,59 +3,90 @@
 <c:set var="pageTitle" value="학점 정보 추가" />
 <%@ include file="../common/head.jsp" %>
 <script>
-    function join_submitForm(form) {
-        form.name.value = form.name.value.trim();
-        if (form.name.value.length == 0) {
-            alert('교과목명을 입력해주세요.');
-            form.name.focus();
-            return;
-        }
-        
-        let subject = $('#subject').val();
+function handleSubmit() {
+    var selectElement = document.getElementById('credit');
+    var selectedValue = parseInt(selectElement.value, 10); // 문자열을 정수로 변환
 
-        if(!subject){
-            alert("이수 구분을 선택해주세요.");
-            $('#subject').focus();
-            return false;
-        }
-        
-        let semester = $('#semester').val();
+    // 여기서 selectedValue를 사용하여 원하는 처리를 할 수 있습니다.
+    console.log("선택된 학점: ", selectedValue);
 
-        if(!semester){
-            alert("학기를 선택해주세요.");
-            $('#semester').focus();
-            return false;
-        }
-        
-        let credit = $('#credit').val();
+    // 폼 제출을 막기 위해 false를 반환합니다. 실제 사용시에는 필요에 따라 변경하세요.
+    return false;
+}
 
-        if(!credit){
-            alert("학점을 선택해주세요.");
-            $('#credit').focus();
-            return false;
-        }
-        
-        let rank = $('#rank').val();
+function handleSubmit2() {
+    var selectElement = document.getElementById('grade');
+    var selectedValue = parseFloat(selectElement.value); // 문자열을 부동 소수점 숫자로 변환
 
-        if(!rank){
-            alert("등급을 선택해주세요.");
-            $('#rank').focus();
-            return false;
-        }
-        
-        let grade = $('#grade').val();
-
-        if(!grade){
-            alert("평점을 선택해주세요.");
-            $('#grade').focus();
-            return false;
-        }
-
-
-        form.submit();
+    // 입력값이 유효한 숫자인지 확인
+    if (isNaN(selectedValue)) {
+        alert('평점을 선택해주세요.');
+        return false;
     }
-</script>
 
+    // 여기서 selectedValue를 사용하여 원하는 처리를 할 수 있습니다.
+    console.log("선택된 평점: ", selectedValue);
+
+    // 폼 제출을 막기 위해 false를 반환합니다. 실제 사용시에는 필요에 따라 변경하세요.
+    return false;
+}
+
+
+function join_submitForm(form) {
+    form.name.value = form.name.value.trim();
+    if (form.name.value.length == 0) {
+        alert('교과목명을 입력해주세요.');
+        form.name.focus();
+        return;
+    }
+
+    let subject = $('#subject').val();
+
+    if (!subject) {
+        alert("이수 구분을 선택해주세요.");
+        $('#subject').focus();
+        return false;
+    }
+
+    let semester = $('#semester').val();
+
+    if (!semester) {
+        alert("학기를 선택해주세요.");
+        $('#semester').focus();
+        return false;
+    }
+
+
+    let credit = $('#credit').val();
+
+    if (!credit) {
+        alert("학점을 선택해주세요.");
+        $('#credit').focus();
+        return false;
+    }
+
+    let rank = $('#rank').val();
+
+    if (!rank) {
+        alert("등급을 선택해주세요.");
+        $('#rank').focus();
+        return false;
+    }
+
+    let grade = $('#grade').val();
+
+    if (!grade) {
+        alert("평점을 선택해주세요.");
+        $('#grade').focus();
+        return false;
+    }
+    
+    handleSubmit();
+    handleSubmit2();
+    
+    form.submit();
+}
+</script>
  <nav class="pb-10 h-full">
  <div class="w-3/4 mx-auto">
      <h2 class="font-bold text-2xl mt-10">학점 정보 수정</h2>
@@ -76,8 +107,8 @@
  						<tr>
 							<th>이수구분</th>
 							<td>
-								<select class="select select-ghost w-full max-w-xs ml-2" id="subject">
-								     <option disabled selected value="${score.subject }">${score.subject }</option>
+								<select class="select select-ghost w-full max-w-xs ml-2" id="subject" name="subject">
+								     <option selected value="${score.subject }">${score.subject }</option>
 								    <option value="교양필수">교양필수</option>
 								    <option value="교양선택">교양선택</option>
 								    <option value="전공필수">전공필수</option>
@@ -87,9 +118,9 @@
 						</tr>
 						<tr>
 							<th>수강일시</th>
-							<td><input class="input input-bordered w-32 ml-2" type="number" name="year" value="2024"/> 학년도 
-							<select class="select select-ghost w-32 max-w-xs ml-2" id="semester">
-									<option disabled selected value="${score.semester }">${score.semester }</option>
+							<td><input class="input input-bordered w-32 ml-2" type="number" name="year" value="${score.year }"/> 학년도 
+							<select class="select select-ghost w-32 max-w-xs ml-2" id="semester" name="semester">
+									<option selected value="${score.semester }">${score.semester }</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
 								    <option value="여름">여름</option>
@@ -99,8 +130,8 @@
 						<tr>
 							<th>학점</th>
 							<td>
-							   <select class="select select-ghost w-32 max-w-xs ml-2" id="credit">
-							   		<option disabled selected value="${score.credit }">${score.credit }</option>
+							   <select class="select select-ghost w-32 max-w-xs ml-2" id="credit" name="credit">
+							   		<option selected value="${score.credit }">${score.credit }</option>
 								    <option value="1">1</option>
 								    <option value="2">2</option>
 								    <option value="3">3</option>
@@ -110,8 +141,8 @@
 						<tr>
 							<th>등급</th>
 							<td>
-							   <select class="select select-ghost w-32 max-w-xs ml-2" id="rank">
-							   		<option disabled selected value="${score.rank }">${score.rank }</option>
+							   <select class="select select-ghost w-32 max-w-xs ml-2" id="rank" name="rank">
+							   		<option selected value="${score.rank }">${score.rank }</option>
 								    <option value="A+">A+</option>
 								    <option value="A">A</option>
 								    <option value="B+">B+</option>
@@ -126,8 +157,8 @@
 						<tr>
 							<th>평점</th>
 							<td>
-							   <select class="select select-ghost w-32 max-w-xs ml-2" id="grade">
-							   		<option disabled selected value="${score.grade }">${score.grade }</option>
+							   <select class="select select-ghost w-32 max-w-xs ml-2" id="grade" name="grade">
+							   		<option selected value="${score.grade }">${score.grade }</option>
 								    <option value="4.5">4.5</option>
 								    <option value="4">4</option>
 								    <option value="3.5">3.5</option>
